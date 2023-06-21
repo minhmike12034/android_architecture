@@ -1,0 +1,23 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+}
+
+apply from: '../../gradleScript/dependencies.gradle'
+
+android {
+    namespace 'com.example.network'
+    compileSdk compile_sdk
+}
+
+dependencies {
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit"
+
+    implementation "androidx.room:room-runtime:$room"
+    annotationProcessor "androidx.room:room-compiler:$room"
+
+    // To use Kotlin annotation processing tool (kapt)
+    kapt "androidx.room:room-compiler:$room"
+}
