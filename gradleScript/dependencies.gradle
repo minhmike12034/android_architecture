@@ -1,0 +1,11 @@
+ext {
+    compile_sdk = 33
+    min_sdk = 24
+    target_sdk = 33
+    version_code = 1
+    versionName = "1.0"
+
+    core_ktx = '1.10.1'
+    appcompat = '1.6.1'
+    material = '1.9.0'
+}

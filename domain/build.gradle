@@ -3,9 +3,11 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply from: '../gradleScript/dependencies.gradle'
+
 android {
     namespace 'com.example.domain'
-    compileSdk 33
+    compileSdk compile_sdk
 }
 
 dependencies {

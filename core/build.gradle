@@ -3,7 +3,9 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
+apply from: '../gradleScript/dependencies.gradle'
+
 android {
     namespace 'com.example.core'
-    compileSdk 33
+    compileSdk compile_sdk
 }
