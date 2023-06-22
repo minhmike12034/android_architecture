@@ -1,6 +1,9 @@
 plugins {
     id 'com.android.library'
     id 'org.jetbrains.kotlin.android'
+    id 'kotlin-kapt'
+    id 'com.google.dagger.hilt.android'
+    id "com.google.android.libraries.mapsplatform.secrets-gradle-plugin"
 }
 
 apply from: '../gradleScript/dependencies.gradle'
@@ -8,4 +11,44 @@ apply from: '../gradleScript/dependencies.gradle'
 android {
     namespace 'com.example.data'
     compileSdk compile_sdk
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+    buildFeatures {
+        buildConfig = true
+    }
+}
+
+secrets {
+    defaultPropertiesFileName = 'secrets.default.properties'
+}
+
+dependencies {
+    implementation project(':domain')
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt"
+    kapt "com.google.dagger:hilt-compiler:$hilt"
+
+    // Retrofit + Gson
+    implementation "com.squareup.retrofit2:retrofit:$retrofit"
+    implementation "com.squareup.retrofit2:converter-gson:$gson_converter"
+    implementation "com.google.code.gson:gson:$gson"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_interceptor"
+
+    // Room
+    implementation "androidx.room:room-runtime:$room"
+    implementation "androidx.room:room-ktx:$room"
+    implementation "androidx.room:room-paging:$room"
+    annotationProcessor "androidx.room:room-compiler:$room"
+    kapt "androidx.room:room-compiler:$room"
+
+    // Paging
+    implementation "androidx.paging:paging-runtime:$paging"
+
 }

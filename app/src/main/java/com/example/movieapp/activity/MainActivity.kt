@@ -1,7 +1,8 @@
-package com.example.movieapp
+package com.example.movieapp.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.example.movieapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -6,11 +6,18 @@ ext {
     versionName = "1.0"
 
     core_ktx = '1.10.1'
+    lifecycle_runtime = "2.6.1"
     appcompat = '1.6.1'
     material = '1.9.0'
+    navigation = "2.6.0"
+    paging = "3.1.1"
+    glide = "4.15.1"
 
     retrofit = '2.9.0'
+    gson_converter = '2.9.0'
+    logging_interceptor = '4.10.0'
+    gson = '2.10.1'
     room = "2.5.1"
-    hilt = '2.44'
+    hilt = '2.44.2'
 
 }
