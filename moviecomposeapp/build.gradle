@@ -1,0 +1,66 @@
+plugins {
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
+}
+
+apply from: '../gradleScript/dependencies.gradle'
+
+android {
+    namespace 'com.example.moviecomposeapp'
+    compileSdk compile_sdk
+
+    defaultConfig {
+        applicationId "com.example.moviecomposeapp"
+        minSdk min_sdk
+        targetSdk target_sdk
+        versionCode version_code
+        versionName versionName
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        vectorDrawables {
+            useSupportLibrary true
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    composeOptions {
+        kotlinCompilerExtensionVersion '1.4.0'
+    }
+
+    packagingOptions {
+        resources {
+            excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+    buildFeatures {
+        compose true
+    }
+}
+
+dependencies {
+    implementation project(':design')
+
+    implementation "androidx.core:core-ktx:${core_ktx}"
+    implementation "androidx.lifecycle:lifecycle-runtime-ktx:$lifecycle_runtime"
+    implementation "androidx.activity:activity-compose:$compose_activity"
+    implementation platform('androidx.compose:compose-bom:2022.10.00')
+    implementation 'androidx.compose.ui:ui'
+    implementation 'androidx.compose.ui:ui-graphics'
+    implementation 'androidx.compose.material3:material3'
+    implementation "androidx.compose.material:material-icons-extended:$compose_material_icons_extended"
+}
