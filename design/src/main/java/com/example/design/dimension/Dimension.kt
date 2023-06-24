@@ -6,10 +6,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Immutable
-object MovieDimension {
+object Dimension {
 
     // Spacing
-
     @Stable
     val Spacing_4: Dp = 4.dp
 
@@ -20,17 +19,10 @@ object MovieDimension {
     val Spacing_16: Dp = 16.dp
 
     // Button
-
     @Stable
-    val ButtonHeight_48: Dp = 48.dp
+    val Button_Height_48: Dp = 48.dp
 
     // Border
-
     @Stable
-    val BorderWidth_2: Dp = 2.dp
-
-    // Radius
-
-    @Stable
-    val Radius_24: Dp = 24.dp
+    val BorderWidth_1: Dp = 1.dp
 }

@@ -15,6 +15,7 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/design" />
             <option value="$PROJECT_DIR$/domain" />
+            <option value="$PROJECT_DIR$/movieapptheme" />
             <option value="$PROJECT_DIR$/moviecomposeapp" />
           </set>
         </option>
