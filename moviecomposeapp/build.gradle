@@ -55,6 +55,8 @@ android {
 }
 
 dependencies {
+    implementation project(':domain')
+    implementation project(':data')
     implementation project(':design')
 
     implementation "androidx.core:core-ktx:${core_ktx}"
@@ -75,4 +77,11 @@ dependencies {
     // Navigation
     implementation "androidx.navigation:navigation-compose:$compose_navigation"
     implementation "androidx.hilt:hilt-navigation-compose:$compose_hilt_navigation"
+
+    // Paging
+    implementation "androidx.paging:paging-runtime:$paging"
+    implementation "androidx.paging:paging-compose:$compose_paging"
+
+    // Coil - load image
+    implementation "io.coil-kt:coil-compose:$coil"
 }

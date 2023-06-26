@@ -9,9 +9,13 @@ import com.example.moviecomposeapp.screen.listmovie.ListMovieViewModel
 fun ListMovieRoute(
     viewModel: ListMovieViewModel = hiltViewModel(),
     onMovieItemClicked: (movieId: String) -> Unit,
+    isDarkTheme: Boolean,
+    onChangeTheme: () -> Unit,
 ) {
     ListMovieScreen(
         viewModel = viewModel,
         onMovieItemClicked = onMovieItemClicked,
+        isDarkTheme = isDarkTheme,
+        onChangeTheme = onChangeTheme,
     )
 }

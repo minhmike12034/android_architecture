@@ -16,7 +16,13 @@ object Dimension {
     val Spacing_8: Dp = 8.dp
 
     @Stable
+    val Spacing_12: Dp = 12.dp
+
+    @Stable
     val Spacing_16: Dp = 16.dp
+
+    @Stable
+    val Spacing_20: Dp = 20.dp
 
     // Button
     @Stable
@@ -25,4 +31,12 @@ object Dimension {
     // Border
     @Stable
     val BorderWidth_1: Dp = 1.dp
+
+    // Radius
+    @Stable
+    val Radius_8: Dp = 8.dp
+
+    // Elevation
+    @Stable
+    val Elevation_8: Dp = 8.dp
 }

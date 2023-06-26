@@ -1,16 +1,250 @@
 package com.example.moviecomposeapp.screen.listmovie
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.aspectRatio
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.DarkMode
+import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.CircularProgressIndicator
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Text
+import androidx.compose.material3.TopAppBar
+import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.dp
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
+import androidx.paging.compose.itemKey
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
+import com.example.design.component.MovieOutlinedButton
 import com.example.design.component.MovieSolidButton
+import com.example.design.dimension.Dimension
+import com.example.domain.entity.MovieEntity
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ListMovieScreen(
     viewModel: ListMovieViewModel,
     onMovieItemClicked: (movieId: String) -> Unit,
+    isDarkTheme: Boolean,
+    onChangeTheme: () -> Unit,
 ) {
-    MovieSolidButton(modifier = Modifier.fillMaxWidth(), text = "Navigation to detail screen") {
-        onMovieItemClicked.invoke("movieId")
+    Scaffold(
+        modifier = Modifier.fillMaxWidth(),
+        topBar = {
+            MovieTopAppBar(
+                isDarkTheme = isDarkTheme,
+                onChangeTheme = onChangeTheme,
+            )
+        },
+        content = { paddingValues ->
+            val listPopularMovies = viewModel.listPopularMovies.collectAsLazyPagingItems()
+            ListMovieContent(
+                modifier = Modifier
+                    .padding(paddingValues)
+                    .fillMaxWidth(),
+                movies = listPopularMovies,
+                onMovieItemClicked = onMovieItemClicked,
+            )
+        },
+    )
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+private fun MovieTopAppBar(
+    isDarkTheme: Boolean,
+    onChangeTheme: () -> Unit,
+) {
+    TopAppBar(
+        title = {
+            Text(
+                text = "Movie compose app",
+                color = Color.White,
+            )
+        },
+        actions = {
+            IconButton(onClick = {
+                onChangeTheme()
+            }) {
+                val modeIcon = when (isDarkTheme) {
+                    true -> Icons.Default.LightMode
+                    else -> Icons.Default.DarkMode
+                }
+                Icon(
+                    modeIcon,
+                    contentDescription = null,
+                    tint = Color.White,
+                )
+            }
+        },
+        colors = TopAppBarDefaults.smallTopAppBarColors(
+            containerColor = MaterialTheme.colorScheme.primary,
+        ),
+    )
+}
+
+@Composable
+fun ListMovieContent(
+    modifier: Modifier,
+    movies: LazyPagingItems<MovieEntity>,
+    onMovieItemClicked: (movieId: String) -> Unit,
+) {
+    val lazyListState = rememberLazyListState()
+    when (movies.loadState.refresh) {
+        is LoadState.Loading -> LoadingItem(Modifier.fillMaxSize())
+        is LoadState.Error -> InitialErrorItem(
+            Modifier.fillMaxSize(),
+            onRefresh = {
+                movies.refresh()
+            },
+        )
+
+        else -> LazyColumn(
+            modifier = modifier.padding(
+                top = Dimension.Spacing_12,
+                bottom = Dimension.Spacing_12,
+                start = Dimension.Spacing_20,
+                end = Dimension.Spacing_20,
+            ),
+            state = lazyListState,
+            verticalArrangement = Arrangement.spacedBy(Dimension.Spacing_12),
+        ) {
+            items(
+                count = movies.itemCount,
+                key = movies.itemKey { it.id },
+            ) { index ->
+                movies[index]?.let {
+                    MovieItem(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .aspectRatio(3F / 2F),
+                        movieEntity = it,
+                        onMovieItemClicked = onMovieItemClicked,
+                    )
+                }
+            }
+
+            when (movies.loadState.append) {
+                is LoadState.Error -> item {
+                    LoadMoreErrorItem(
+                        modifier = Modifier.fillMaxWidth(),
+                        onRetry = {
+                            movies.retry()
+                        },
+                    )
+                }
+
+                is LoadState.Loading -> item { LoadingItem(modifier = Modifier.fillMaxWidth()) }
+                else -> Unit
+            }
+        }
+    }
+}
+
+@Composable
+private fun MovieItem(
+    modifier: Modifier,
+    movieEntity: MovieEntity,
+    onMovieItemClicked: (movieId: String) -> Unit,
+) {
+    Card(
+        modifier = modifier
+            .clickable {
+                onMovieItemClicked.invoke(
+                    movieEntity.id.toString(),
+                )
+            },
+        elevation = CardDefaults.elevatedCardElevation(
+            defaultElevation = Dimension.Elevation_8,
+        ),
+        shape = RoundedCornerShape(Dimension.Radius_8),
+    ) {
+        Box(modifier = Modifier) {
+            AsyncImage(
+                modifier = Modifier,
+                contentScale = ContentScale.Crop,
+                model = ImageRequest.Builder(LocalContext.current)
+                    .data(movieEntity.imageUrl)
+                    .crossfade(true)
+                    .build(),
+                contentDescription = null,
+            )
+            Text(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(Color.Black.copy(alpha = 0.5F))
+                    .align(Alignment.BottomCenter),
+                textAlign = TextAlign.Center,
+                text = movieEntity.title,
+                color = Color.White,
+            )
+        }
+    }
+}
+
+@Composable
+private fun InitialErrorItem(
+    modifier: Modifier,
+    onRefresh: () -> Unit,
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+    ) {
+        MovieSolidButton(modifier = Modifier, text = "Refresh") {
+            onRefresh.invoke()
+        }
+    }
+}
+
+@Composable
+private fun LoadingItem(modifier: Modifier) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+    ) {
+        CircularProgressIndicator(
+            modifier = Modifier.size(50.dp),
+        )
+    }
+}
+
+@Composable
+private fun LoadMoreErrorItem(
+    modifier: Modifier,
+    onRetry: () -> Unit,
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center,
+    ) {
+        MovieOutlinedButton(modifier = Modifier, text = "Retry") {
+            onRetry.invoke()
+        }
     }
 }

@@ -14,6 +14,8 @@ import com.example.moviecomposeapp.route.MovieDetailRoute
 fun MainNavigationGraph(
     navController: NavHostController,
     modifier: Modifier = Modifier,
+    isDarkTheme: Boolean,
+    onChangeTheme: () -> Unit,
 ) {
     NavHost(
         navController = navController,
@@ -29,6 +31,8 @@ fun MainNavigationGraph(
                         ),
                     )
                 },
+                isDarkTheme = isDarkTheme,
+                onChangeTheme = onChangeTheme,
             )
         }
 
