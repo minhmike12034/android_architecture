@@ -1,4 +1,4 @@
-package com.example.movieapp.fragment
+package com.example.movieapp.fragment.listmovie
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

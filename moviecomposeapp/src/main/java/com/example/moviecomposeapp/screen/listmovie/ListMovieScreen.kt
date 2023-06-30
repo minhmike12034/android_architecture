@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
@@ -44,6 +45,7 @@ import com.example.design.component.MovieOutlinedButton
 import com.example.design.component.MovieSolidButton
 import com.example.design.dimension.Dimension
 import com.example.domain.entity.MovieEntity
+import com.example.moviecomposeapp.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -83,7 +85,7 @@ private fun MovieTopAppBar(
     TopAppBar(
         title = {
             Text(
-                text = "Movie compose app",
+                text = stringResource(R.string.list_movie_compose),
                 color = Color.White,
             )
         },
@@ -142,7 +144,7 @@ fun ListMovieContent(
                     MovieItem(
                         modifier = Modifier
                             .fillMaxWidth()
-                            .aspectRatio(3F / 2F),
+                            .aspectRatio(3.5F / 2F),
                         movieEntity = it,
                         onMovieItemClicked = onMovieItemClicked,
                     )
@@ -202,6 +204,7 @@ private fun MovieItem(
                 textAlign = TextAlign.Center,
                 text = movieEntity.title,
                 color = Color.White,
+                style = MaterialTheme.typography.bodyMedium,
             )
         }
     }

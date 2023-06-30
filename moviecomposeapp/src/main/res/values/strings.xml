@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">moviecomposeapp</string>
+    <string name="list_movie_compose">List movie compose</string>
+    <string name="movie_detail_compose">Movie detail compose</string>
 </resources>

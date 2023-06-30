@@ -7,7 +7,22 @@
 
     <fragment
         android:id="@+id/listMovieFragment"
-        android:name="com.example.movieapp.fragment.ListMovieFragment"
+        android:name="com.example.movieapp.fragment.listmovie.ListMovieFragment"
         android:label="@string/list_movie"
-        tools:layout="@layout/fragment_list_movie" />
+        tools:layout="@layout/fragment_list_movie">
+        <action
+            android:id="@+id/action_listMovieFragment_to_movieDetailFragment"
+            app:destination="@id/movieDetailFragment">
+            <argument
+                android:name="movieId"
+                android:defaultValue=""
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailFragment"
+        android:name="com.example.movieapp.fragment.moviedetail.MovieDetailFragment"
+        android:label="@string/movie_detail"
+        tools:layout="@layout/fragment_movie_detail" />
 </navigation>

@@ -8,8 +8,10 @@ import com.example.moviecomposeapp.screen.moviedetail.MovieDetailViewModel
 @Composable
 fun MovieDetailRoute(
     viewModel: MovieDetailViewModel = hiltViewModel(),
+    onBackClick: () -> Unit,
 ) {
     MovieDetailScreen(
         viewModel = viewModel,
+        onBackClick = onBackClick,
     )
 }

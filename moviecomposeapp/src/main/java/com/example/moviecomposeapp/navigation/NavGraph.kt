@@ -47,7 +47,9 @@ fun MainNavigationGraph(
                 },
             ),
         ) {
-            MovieDetailRoute()
+            MovieDetailRoute(onBackClick = {
+                navController.popBackStack()
+            })
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.example.movieapp.fragment
+package com.example.movieapp.fragment.listmovie
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,11 +9,12 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.domain.entity.MovieEntity
 import com.example.movieapp.databinding.FragmentListMovieBinding
-import com.example.movieapp.fragment.adapter.LoadMoreAdapter
-import com.example.movieapp.fragment.adapter.MovieAdapter
+import com.example.movieapp.fragment.listmovie.adapter.LoadMoreAdapter
+import com.example.movieapp.fragment.listmovie.adapter.MovieAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.launchIn
@@ -73,5 +74,11 @@ class ListMovieFragment : Fragment(), MovieAdapter.MovieListener {
     }
 
     override fun onMovieClick(movie: MovieEntity) {
+        findNavController().navigate(
+            ListMovieFragmentDirections
+                .actionListMovieFragmentToMovieDetailFragment(
+                    movieId = movie.id.toString(),
+                ),
+        )
     }
 }
