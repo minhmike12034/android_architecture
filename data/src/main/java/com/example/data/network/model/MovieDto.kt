@@ -9,15 +9,6 @@ data class MovieDto(
     @SerializedName("poster_path")
     val posterPath: String? = null,
 
-    @SerializedName("overview")
-    val overview: String,
-
-    @SerializedName("release_date")
-    val releaseDate: String? = null,
-
-    @SerializedName("original_title")
-    val originalTitle: String,
-
     @SerializedName("title")
     val title: String,
 )

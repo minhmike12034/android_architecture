@@ -1,6 +1,5 @@
 package com.example.movieapp.fragment.listmovie.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
@@ -44,7 +43,6 @@ class MovieAdapter(
                 textMovieName.text = movie.title
 
                 root.setOnClickListener {
-                    Log.e("minh", "movie " + movie)
                     listener.onMovieClick(movie)
                 }
             }

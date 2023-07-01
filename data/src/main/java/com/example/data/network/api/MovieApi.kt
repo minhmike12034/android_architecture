@@ -13,11 +13,11 @@ interface MovieApi {
         @Query("api_key") key: String,
         @Query("page") page: Int,
         @Query("limit") limit: Int,
-    ): BaseListResponse<List<MovieDto>?>
+    ): BaseListResponse<List<MovieDto>>
 
     @GET(value = "movie/{movie_id}")
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: String,
         @Query("api_key") key: String,
-    ): MovieDetailDto?
+    ): MovieDetailDto
 }

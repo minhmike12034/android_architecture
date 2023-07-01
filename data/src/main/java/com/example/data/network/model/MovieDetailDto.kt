@@ -5,16 +5,10 @@ import com.google.gson.annotations.SerializedName
 data class MovieDetailDto(
 
     @SerializedName("id")
-    val id: Int,
-
-    @SerializedName("adult")
-    val adult: Boolean,
+    val id: Long,
 
     @SerializedName("poster_path")
     val posterPath: String,
-
-    @SerializedName("original_title")
-    val originalTitle: String,
 
     @SerializedName("title")
     val title: String,
@@ -24,11 +18,5 @@ data class MovieDetailDto(
 
     @SerializedName("status")
     val status: String,
-
-    @SerializedName("vote_count")
-    val voteCount: Int,
-
-    @SerializedName("vote_average")
-    val voteAverage: Double,
 
 )

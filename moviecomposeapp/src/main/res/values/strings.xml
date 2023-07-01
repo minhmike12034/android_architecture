@@ -2,4 +2,7 @@
     <string name="app_name">moviecomposeapp</string>
     <string name="list_movie_compose">List movie compose</string>
     <string name="movie_detail_compose">Movie detail compose</string>
+    <string name="movie_title">Title: %1$s</string>
+    <string name="movie_overview">Overview: %1$s</string>
+    <string name="movie_status">Status: %1$s</string>
 </resources>

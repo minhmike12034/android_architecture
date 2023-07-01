@@ -11,6 +11,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -77,5 +78,112 @@ fun ListMovieButton(modifier: Modifier) {
             text = "Text Button",
         ) {
         }
+        
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Headline large",
+            style = MaterialTheme.typography.headlineLarge,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Headline medium",
+            style = MaterialTheme.typography.headlineMedium,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Headline small",
+            style = MaterialTheme.typography.headlineSmall,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Title large",
+            style = MaterialTheme.typography.titleLarge,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Title medium",
+            style = MaterialTheme.typography.titleMedium,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Title small",
+            style = MaterialTheme.typography.titleSmall,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Body large",
+            style = MaterialTheme.typography.bodyLarge,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Body medium",
+            style = MaterialTheme.typography.bodyMedium,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Body small",
+            style = MaterialTheme.typography.bodySmall,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Label large",
+            style = MaterialTheme.typography.labelLarge,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Label medium",
+            style = MaterialTheme.typography.labelMedium,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Label small",
+            style = MaterialTheme.typography.labelSmall,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Display large",
+            style = MaterialTheme.typography.displayLarge,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Display medium",
+            style = MaterialTheme.typography.displayMedium,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Display small",
+            style = MaterialTheme.typography.displaySmall,
+        )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
     }
 }

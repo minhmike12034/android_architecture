@@ -10,10 +10,10 @@ interface MovieService {
         key: String,
         page: Int,
         limit: Int,
-    ): BaseListResponse<List<MovieDto>?>
+    ): BaseListResponse<List<MovieDto>>
 
     suspend fun getMovieDetail(
         movieId: String,
         key: String,
-    ): MovieDetailDto?
+    ): MovieDetailDto
 }

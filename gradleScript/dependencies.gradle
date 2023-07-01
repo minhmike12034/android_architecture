@@ -5,6 +5,8 @@ ext {
     version_code = 1
     versionName = "1.0"
 
+    kotlin_compiler_extension_version = "1.4.6"
+
     core_ktx = '1.10.1'
     lifecycle_runtime = "2.6.1"
     appcompat = '1.6.1'

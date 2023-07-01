@@ -15,14 +15,14 @@ class MovieServiceImpl @Inject constructor(
         key: String,
         page: Int,
         limit: Int,
-    ): BaseListResponse<List<MovieDto>?> {
+    ): BaseListResponse<List<MovieDto>> {
         return movieApi.getPopularMovies(key, page, limit)
     }
 
     override suspend fun getMovieDetail(
         movieId: String,
         key: String,
-    ): MovieDetailDto? {
+    ): MovieDetailDto {
         return movieApi.getMovieDetail(movieId, key)
     }
 }

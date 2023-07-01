@@ -3,4 +3,7 @@
     <string name="list_movie">List movie</string>
     <string name="movie_detail">Movie detail</string>
     <string name="refresh">Refresh</string>
+    <string name="movie_title">Title: %1$s</string>
+    <string name="movie_overview">Overview: %1$s</string>
+    <string name="movie_status">Status: %1$s</string>
 </resources>

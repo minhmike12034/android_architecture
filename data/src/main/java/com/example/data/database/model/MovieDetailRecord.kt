@@ -8,7 +8,7 @@ import com.example.data.database.MovieDatabase
 @Entity(
     tableName = MovieDatabase.MovieTable,
 )
-data class MovieRecord(
+data class MovieDetailRecord(
     @PrimaryKey
     val id: Long,
 
@@ -16,14 +16,11 @@ data class MovieRecord(
     val posterPath: String? = null,
 
     @ColumnInfo(defaultValue = "")
+    val title: String,
+
+    @ColumnInfo(defaultValue = "")
     val overview: String,
 
     @ColumnInfo(defaultValue = "")
-    val releaseDate: String?,
-
-    @ColumnInfo(defaultValue = "")
-    val originalTitle: String,
-
-    @ColumnInfo(defaultValue = "")
-    val title: String,
+    val status: String?,
 )

@@ -17,7 +17,7 @@ android {
         jvmTarget = '17'
     }
     composeOptions {
-        kotlinCompilerExtensionVersion '1.4.6'
+        kotlinCompilerExtensionVersion kotlin_compiler_extension_version
     }
     buildFeatures {
         compose true

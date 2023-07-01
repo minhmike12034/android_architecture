@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -17,7 +16,6 @@ import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -34,7 +32,6 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -42,10 +39,11 @@ import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.design.component.MovieOutlinedButton
-import com.example.design.component.MovieSolidButton
 import com.example.design.dimension.Dimension
 import com.example.domain.entity.MovieEntity
 import com.example.moviecomposeapp.R
+import com.example.moviecomposeapp.screen.ErrorItem
+import com.example.moviecomposeapp.screen.LoadingItem
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -119,7 +117,7 @@ fun ListMovieContent(
     val lazyListState = rememberLazyListState()
     when (movies.loadState.refresh) {
         is LoadState.Loading -> LoadingItem(Modifier.fillMaxSize())
-        is LoadState.Error -> InitialErrorItem(
+        is LoadState.Error -> ErrorItem(
             Modifier.fillMaxSize(),
             onRefresh = {
                 movies.refresh()
@@ -202,38 +200,11 @@ private fun MovieItem(
                     .background(Color.Black.copy(alpha = 0.5F))
                     .align(Alignment.BottomCenter),
                 textAlign = TextAlign.Center,
-                text = movieEntity.title,
+                text = movieEntity.title.orEmpty(),
                 color = Color.White,
                 style = MaterialTheme.typography.bodyMedium,
             )
         }
-    }
-}
-
-@Composable
-private fun InitialErrorItem(
-    modifier: Modifier,
-    onRefresh: () -> Unit,
-) {
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.Center,
-    ) {
-        MovieSolidButton(modifier = Modifier, text = "Refresh") {
-            onRefresh.invoke()
-        }
-    }
-}
-
-@Composable
-private fun LoadingItem(modifier: Modifier) {
-    Box(
-        modifier = modifier,
-        contentAlignment = Alignment.Center,
-    ) {
-        CircularProgressIndicator(
-            modifier = Modifier.size(50.dp),
-        )
     }
 }
 
