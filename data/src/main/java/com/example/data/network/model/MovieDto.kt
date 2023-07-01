@@ -7,8 +7,14 @@ data class MovieDto(
     val id: Long,
 
     @SerializedName("poster_path")
-    val posterPath: String? = null,
+    val posterPath: String,
 
     @SerializedName("title")
     val title: String,
+
+    @SerializedName("overview")
+    val overview: String,
+
+    @SerializedName("status")
+    val status: String,
 )

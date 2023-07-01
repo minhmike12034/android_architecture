@@ -31,11 +31,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.design.dimension.Dimension
-import com.example.domain.entity.MovieDetailEntity
+import com.example.domain.entity.MovieEntity
 import com.example.moviecomposeapp.R
 import com.example.moviecomposeapp.screen.ErrorItem
 import com.example.moviecomposeapp.screen.LoadingItem
-import com.example.moviecomposeapp.screen.moviedetail.state.MovieDetailState
+import com.example.moviecomposeapp.screen.moviedetail.state.MovieState
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,7 +43,7 @@ internal fun MovieDetailScreen(
     viewModel: MovieDetailViewModel,
     onBackClick: () -> Unit,
 ) {
-    val movieDetailState = viewModel.movieDetailState.collectAsState()
+    val movieDetailState = viewModel.movieState.collectAsState()
     Scaffold(
         modifier = Modifier.fillMaxWidth(),
         topBar = {
@@ -75,7 +75,7 @@ internal fun MovieDetailScreen(
                 paddingValues = paddingValues,
                 movieDetailState = movieDetailState.value,
                 onRefresh = {
-                    viewModel.getMovieDetail()
+                    viewModel.getMovie()
                 },
             )
         },
@@ -85,17 +85,17 @@ internal fun MovieDetailScreen(
 @Composable
 private fun MovieDetailContent(
     paddingValues: PaddingValues,
-    movieDetailState: MovieDetailState,
+    movieDetailState: MovieState,
     onRefresh: () -> Unit,
 ) {
     when (movieDetailState) {
-        is MovieDetailState.Loading -> LoadingItem(
+        is MovieState.Loading -> LoadingItem(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize(),
         )
 
-        is MovieDetailState.GetMovieDetailFailure -> ErrorItem(
+        is MovieState.GetMovieDetailFailure -> ErrorItem(
             modifier = Modifier
                 .padding(paddingValues)
                 .fillMaxSize(),
@@ -104,17 +104,20 @@ private fun MovieDetailContent(
             },
         )
 
-        is MovieDetailState.GetMovieDetailSuccess -> {
+        is MovieState.GetMovieDetailSuccess -> {
             MovieDetailSuccess(
                 modifier = Modifier.padding(paddingValues),
-                movieDetailEntity = movieDetailState.movieDetailEntity,
+                movie = movieDetailState.movieEntity,
             )
         }
     }
 }
 
 @Composable
-fun MovieDetailSuccess(modifier: Modifier, movieDetailEntity: MovieDetailEntity) {
+fun MovieDetailSuccess(
+    modifier: Modifier,
+    movie: MovieEntity,
+) {
     Column(
         modifier = modifier
             .verticalScroll(rememberScrollState()),
@@ -124,7 +127,7 @@ fun MovieDetailSuccess(modifier: Modifier, movieDetailEntity: MovieDetailEntity)
                 .aspectRatio(1F / 1F),
             contentScale = ContentScale.Crop,
             model = ImageRequest.Builder(LocalContext.current)
-                .data(movieDetailEntity.imageUrl)
+                .data(movie.imageUrl)
                 .crossfade(true)
                 .build(),
             contentDescription = null,
@@ -139,7 +142,7 @@ fun MovieDetailSuccess(modifier: Modifier, movieDetailEntity: MovieDetailEntity)
             ),
             text = stringResource(
                 id = R.string.movie_title,
-                movieDetailEntity.title.orEmpty(),
+                movie.title.orEmpty(),
             ),
             style = MaterialTheme.typography.titleMedium,
         )
@@ -153,7 +156,7 @@ fun MovieDetailSuccess(modifier: Modifier, movieDetailEntity: MovieDetailEntity)
             ),
             text = stringResource(
                 id = R.string.movie_overview,
-                movieDetailEntity.overview.orEmpty(),
+                movie.overview.orEmpty(),
             ),
             maxLines = 5,
             overflow = TextOverflow.Ellipsis,
@@ -169,7 +172,7 @@ fun MovieDetailSuccess(modifier: Modifier, movieDetailEntity: MovieDetailEntity)
             ),
             text = stringResource(
                 id = R.string.movie_status,
-                movieDetailEntity.status.orEmpty(),
+                movie.status.orEmpty(),
             ),
             style = MaterialTheme.typography.bodyMedium,
         )

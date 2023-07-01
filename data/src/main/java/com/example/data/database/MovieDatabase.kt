@@ -3,11 +3,11 @@ package com.example.data.database
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.example.data.database.dao.MovieDao
-import com.example.data.database.model.MovieDetailRecord
+import com.example.data.database.model.MovieRecord
 
 @Database(
     entities = [
-        MovieDetailRecord::class,
+        MovieRecord::class,
     ],
     version = 1,
     exportSchema = false,

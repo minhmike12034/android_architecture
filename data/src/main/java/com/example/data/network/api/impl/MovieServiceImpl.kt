@@ -2,7 +2,6 @@ package com.example.data.network.api.impl
 
 import com.example.data.network.api.MovieApi
 import com.example.data.network.api.MovieService
-import com.example.data.network.model.MovieDetailDto
 import com.example.data.network.model.MovieDto
 import com.example.data.network.response.BaseListResponse
 import javax.inject.Inject
@@ -19,10 +18,10 @@ class MovieServiceImpl @Inject constructor(
         return movieApi.getPopularMovies(key, page, limit)
     }
 
-    override suspend fun getMovieDetail(
+    override suspend fun getMovie(
         movieId: String,
         key: String,
-    ): MovieDetailDto {
+    ): MovieDto {
         return movieApi.getMovieDetail(movieId, key)
     }
 }

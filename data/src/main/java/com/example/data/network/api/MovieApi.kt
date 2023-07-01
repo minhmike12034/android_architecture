@@ -1,6 +1,5 @@
 package com.example.data.network.api
 
-import com.example.data.network.model.MovieDetailDto
 import com.example.data.network.model.MovieDto
 import com.example.data.network.response.BaseListResponse
 import retrofit2.http.GET
@@ -19,5 +18,5 @@ interface MovieApi {
     suspend fun getMovieDetail(
         @Path("movie_id") movieId: String,
         @Query("api_key") key: String,
-    ): MovieDetailDto
+    ): MovieDto
 }

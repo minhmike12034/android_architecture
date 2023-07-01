@@ -11,19 +11,17 @@ import androidx.lifecycle.flowWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
-import com.example.domain.entity.MovieDetailEntity
 import com.example.movieapp.R
-import com.example.movieapp.databinding.FragmentMovieDetailBinding
-import com.example.movieapp.fragment.moviedetail.state.MovieDetailState
+import com.example.movieapp.databinding.FragmentMovieBinding
+import com.example.movieapp.fragment.moviedetail.state.MovieState
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class MovieDetailFragment : Fragment() {
 
-    private lateinit var binding: FragmentMovieDetailBinding
+    private lateinit var binding: FragmentMovieBinding
 
     private val viewModel: MovieDetailViewModel by viewModels()
 
@@ -32,7 +30,7 @@ class MovieDetailFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-        binding = FragmentMovieDetailBinding.inflate(inflater, container, false)
+        binding = FragmentMovieBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -44,41 +42,38 @@ class MovieDetailFragment : Fragment() {
         }
 
         binding.buttonRefresh.setOnClickListener {
-            viewModel.getMovieDetail()
+            viewModel.getMovie()
         }
 
         observeFlow()
     }
 
     private fun observeFlow() {
-        viewModel.movieDetailState
-            .filterNotNull()
+        viewModel.movieState
             .flowWithLifecycle(viewLifecycleOwner.lifecycle)
-            .onEach { state ->
-                binding.initialLoading.isVisible = state is MovieDetailState.Loading
-                binding.buttonRefresh.isVisible = state is MovieDetailState.GetMovieDetailFailure
-
-                when (state) {
-                    is MovieDetailState.GetMovieDetailSuccess -> {
-                        val movie = state.movieDetailEntity
-                        updateMovieDetail(movie)
-                    }
-
-                    else -> Unit
-                }
-            }
+            .onEach { state -> updateMovieState(state) }
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    private fun updateMovieDetail(movie: MovieDetailEntity) {
-        Glide
-            .with(requireContext())
-            .load(movie.imageUrl)
-            .centerCrop()
-            .into(binding.imageMovie)
+    private fun updateMovieState(state: MovieState) {
+        binding.initialLoading.isVisible = state is MovieState.Loading
+        binding.buttonRefresh.isVisible = state is MovieState.GetMovieDetailFailure
 
-        binding.textTitle.text = getString(R.string.movie_title, movie.title)
-        binding.textOverview.text = getString(R.string.movie_overview, movie.overview)
-        binding.textStatus.text = getString(R.string.movie_status, movie.status)
+        when (state) {
+            is MovieState.GetMovieDetailSuccess -> {
+                val movie = state.movieEntity
+                Glide
+                    .with(requireContext())
+                    .load(movie.imageUrl)
+                    .centerCrop()
+                    .into(binding.imageMovie)
+
+                binding.textTitle.text = getString(R.string.movie_title, movie.title)
+                binding.textOverview.text = getString(R.string.movie_overview, movie.overview)
+                binding.textStatus.text = getString(R.string.movie_status, movie.status)
+            }
+
+            else -> Unit
+        }
     }
 }

@@ -1,5 +1,6 @@
 package com.example.data.di
 
+import com.example.data.database.datasource.LocalMovieDataSource
 import com.example.data.network.api.MovieService
 import com.example.data.repository.impl.MovieRepositoryImpl
 import com.example.domain.repository.MovieRepository
@@ -17,7 +18,8 @@ object RepositoryModule {
     @Provides
     fun provideMovieRepository(
         movieService: MovieService,
+        localMovieDataSource: LocalMovieDataSource
     ): MovieRepository {
-        return MovieRepositoryImpl(movieService)
+        return MovieRepositoryImpl(movieService,localMovieDataSource)
     }
 }
