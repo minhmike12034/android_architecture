@@ -34,7 +34,6 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.paging.compose.itemKey
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
@@ -48,7 +47,7 @@ import com.example.moviecomposeapp.screen.LoadingItem
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun ListMovieScreen(
-    viewModel: ListMovieViewModel,
+    listPopularMovies: LazyPagingItems<MovieEntity>,
     onMovieItemClicked: (movieId: String) -> Unit,
     isDarkTheme: Boolean,
     onChangeTheme: () -> Unit,
@@ -62,7 +61,6 @@ internal fun ListMovieScreen(
             )
         },
         content = { paddingValues ->
-            val listPopularMovies = viewModel.listPopularMovies.collectAsLazyPagingItems()
             ListMovieContent(
                 modifier = Modifier
                     .padding(paddingValues)

@@ -3,24 +3,33 @@ plugins {
     id 'org.jetbrains.kotlin.android'
 }
 
-apply from: '../gradleScript/dependencies.gradle'
+apply from: "$rootDir/dependencies.gradle"
 
 android {
     namespace 'com.example.design'
     compileSdk compile_sdk
 
+    composeOptions {
+        kotlinCompilerExtensionVersion kotlin_compiler_extension_version
+    }
+
+    buildFeatures {
+        compose true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = '17'
     }
-    composeOptions {
-        kotlinCompilerExtensionVersion kotlin_compiler_extension_version
-    }
-    buildFeatures {
-        compose true
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
     }
 }
 

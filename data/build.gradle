@@ -6,7 +6,7 @@ plugins {
     id "com.google.android.libraries.mapsplatform.secrets-gradle-plugin"
 }
 
-apply from: '../gradleScript/dependencies.gradle'
+apply from: "$rootDir/dependencies.gradle"
 
 android {
     namespace 'com.example.data'
@@ -16,11 +16,29 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+
     kotlinOptions {
         jvmTarget = '17'
     }
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
+        }
+    }
+
     buildFeatures {
         buildConfig = true
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+        }
+
+        release {
+            buildConfigField "String", "BASE_URL", "\"https://api.themoviedb.org/3/\""
+        }
     }
 }
 

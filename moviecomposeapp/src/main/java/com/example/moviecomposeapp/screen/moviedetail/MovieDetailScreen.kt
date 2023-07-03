@@ -21,7 +21,6 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
@@ -40,10 +39,10 @@ import com.example.moviecomposeapp.screen.moviedetail.state.MovieState
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 internal fun MovieDetailScreen(
-    viewModel: MovieDetailViewModel,
+    movieState: MovieState,
+    onRefreshClick: () -> Unit,
     onBackClick: () -> Unit,
 ) {
-    val movieDetailState = viewModel.movieState.collectAsState()
     Scaffold(
         modifier = Modifier.fillMaxWidth(),
         topBar = {
@@ -73,9 +72,9 @@ internal fun MovieDetailScreen(
         content = { paddingValues ->
             MovieDetailContent(
                 paddingValues = paddingValues,
-                movieDetailState = movieDetailState.value,
+                movieDetailState = movieState,
                 onRefresh = {
-                    viewModel.getMovie()
+                    onRefreshClick.invoke()
                 },
             )
         },

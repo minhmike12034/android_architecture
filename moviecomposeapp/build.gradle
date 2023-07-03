@@ -5,7 +5,8 @@ plugins {
     id 'com.google.dagger.hilt.android'
 }
 
-apply from: '../gradleScript/dependencies.gradle'
+apply from: "$rootDir/dependencies.gradle"
+apply from: "$rootDir/jacoco.gradle"
 
 android {
     namespace 'com.example.moviecomposeapp'
@@ -31,14 +32,6 @@ android {
         }
     }
 
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-    kotlinOptions {
-        jvmTarget = '17'
-    }
-
     composeOptions {
         kotlinCompilerExtensionVersion kotlin_compiler_extension_version
     }
@@ -46,6 +39,21 @@ android {
     packagingOptions {
         resources {
             excludes += '/META-INF/{AL2.0,LGPL2.1}'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+
+    kotlinOptions {
+        jvmTarget = '17'
+    }
+
+    java {
+        toolchain {
+            languageVersion.set(JavaLanguageVersion.of(17))
         }
     }
 
@@ -84,4 +92,13 @@ dependencies {
 
     // Coil - load image
     implementation "io.coil-kt:coil-compose:$coil"
+
+    // Testing
+
+    // Test rules and transitive dependencies:
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_ui_test")
+    // Needed for createAndroidComposeRule, but not createComposeRule:
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_ui_test")
+
+    testImplementation("org.junit.jupiter:junit-jupiter:$junit_test")
 }

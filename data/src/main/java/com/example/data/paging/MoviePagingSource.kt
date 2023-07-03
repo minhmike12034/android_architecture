@@ -35,7 +35,7 @@ class MoviePagingSource @Inject constructor(
             page = page,
             PAGE_LIMIT,
         ).data
-            ?.map { it.toMovieEntity() }
+            .map { it.toMovieEntity() }
             .orEmpty()
     }
 

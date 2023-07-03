@@ -28,4 +28,7 @@ ext {
     compose_navigation = "2.6.0"
     compose_hilt_navigation = "1.1.0-alpha01"
     compose_paging = "1.0.0-alpha19"
+    compose_ui_test = "1.4.3"
+
+    junit_test = "5.9.1"
 }
