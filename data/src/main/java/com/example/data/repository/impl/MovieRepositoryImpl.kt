@@ -6,11 +6,14 @@ import androidx.paging.PagingData
 import com.example.data.BuildConfig
 import com.example.data.database.datasource.LocalMovieDataSource
 import com.example.data.database.model.MovieRecord
+import com.example.data.mapper.toDatabaseErrorEntity
 import com.example.data.mapper.toMovieEntity
 import com.example.data.mapper.toMovieRecord
 import com.example.data.network.api.MovieService
 import com.example.data.paging.MoviePagingSource
+import com.example.domain.either.Either
 import com.example.domain.entity.MovieEntity
+import com.example.domain.error.ErrorEntity
 import com.example.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -26,26 +29,43 @@ class MovieRepositoryImpl @Inject constructor(
         }.flow
     }
 
-    override suspend fun getMovie(movieId: String): MovieEntity? {
+    override suspend fun getMovie(movieId: String): Either<ErrorEntity, MovieEntity> {
         return try {
             // Get movie from server
             val movieDto = movieService.getMovie(movieId = movieId, key = BuildConfig.API_KEY)
 
             // Save to database
-            saveMovieRecord(movieDto.toMovieRecord())
-
-            movieDto.toMovieEntity()
+            when (val either = saveMovieRecord(movieDto.toMovieRecord())) {
+                is Either.Success -> Either.success(movieDto.toMovieEntity())
+                is Either.Fail -> Either.fail(either.value)
+            }
         } catch (e: Exception) {
-            // Get data from database in case receive failure from server
-            getMovieRecord(movieId)?.toMovieEntity()
+            when (val either = getMovieRecord(movieId)) {
+                is Either.Success -> {
+                    when (either.value != null) {
+                        true -> Either.success(either.value!!.toMovieEntity())
+                        else -> Either.fail(ErrorEntity.DatabaseErrorEntity)
+                    }
+                }
+
+                is Either.Fail -> Either.fail(either.value)
+            }
         }
     }
 
-    private suspend fun saveMovieRecord(movieRecord: MovieRecord) {
-        localMovieDataSource.saveMovieRecord(movieRecord)
+    private suspend fun saveMovieRecord(movieRecord: MovieRecord): Either<ErrorEntity.DatabaseErrorEntity, Long> {
+        return try {
+            Either.success(localMovieDataSource.saveMovieRecord(movieRecord))
+        } catch (e: Exception) {
+            Either.fail(e.toDatabaseErrorEntity())
+        }
     }
 
-    private suspend fun getMovieRecord(movieId: String): MovieRecord? {
-        return localMovieDataSource.getMovieRecord(movieId)
+    private suspend fun getMovieRecord(movieId: String): Either<ErrorEntity, MovieRecord?> {
+        return try {
+            Either.success(localMovieDataSource.getMovieRecord(movieId))
+        } catch (e: Exception) {
+            Either.fail(e.toDatabaseErrorEntity())
+        }
     }
 }

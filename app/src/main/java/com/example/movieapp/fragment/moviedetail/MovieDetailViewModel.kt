@@ -4,6 +4,7 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.network.DispatcherProvider
+import com.example.domain.either.Either
 import com.example.domain.usecase.GetMovieUseCase
 import com.example.movieapp.fragment.moviedetail.state.MovieState
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -30,13 +31,15 @@ class MovieDetailViewModel @Inject constructor(
 
     fun getMovie() {
         viewModelScope.launch(dispatcherProvider.io()) {
-            getMovieUseCase.execute(movieId)
-                .onSuccess {
-                    _movieState.value = MovieState.GetMovieDetailSuccess(it)
+            when (val either = getMovieUseCase.execute(movieId)) {
+                is Either.Success -> {
+                    _movieState.value = MovieState.GetMovieDetailSuccess(either.value)
                 }
-                .onFailure {
-                    _movieState.value = MovieState.GetMovieDetailFailure(it)
+
+                is Either.Fail -> {
+                    _movieState.value = MovieState.GetMovieDetailFailure(either.value)
                 }
+            }
         }
     }
 }

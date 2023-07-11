@@ -4,5 +4,5 @@ import com.example.data.database.model.MovieRecord
 
 interface LocalMovieDataSource {
     suspend fun getMovieRecord(movieId: String): MovieRecord?
-    suspend fun saveMovieRecord(movieRecord: MovieRecord)
+    suspend fun saveMovieRecord(movieRecord: MovieRecord): Long
 }

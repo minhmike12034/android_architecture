@@ -68,5 +68,4 @@ dependencies {
 
     // Paging
     implementation "androidx.paging:paging-runtime:$paging"
-
 }

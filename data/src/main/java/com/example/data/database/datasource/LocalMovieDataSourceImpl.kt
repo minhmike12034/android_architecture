@@ -11,7 +11,7 @@ class LocalMovieDataSourceImpl @Inject constructor(
         return movieDao.getMovieRecord(movieId = movieId)
     }
 
-    override suspend fun saveMovieRecord(movieRecord: MovieRecord) {
-        movieDao.insertMovie(movieRecord)
+    override suspend fun saveMovieRecord(movieRecord: MovieRecord): Long {
+        return movieDao.insertMovie(movieRecord)
     }
 }
