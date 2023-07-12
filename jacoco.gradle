@@ -108,18 +108,3 @@ def setupAndroidReporting() {
         }
     }
 }
-
-android {
-    buildTypes {
-        debug {
-            testCoverageEnabled true
-        }
-    }
-    testOptions {
-        unitTests {
-            all {
-                useJUnitPlatform()
-            }
-        }
-    }
-}
