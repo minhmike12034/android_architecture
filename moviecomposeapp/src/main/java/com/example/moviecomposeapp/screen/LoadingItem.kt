@@ -6,7 +6,9 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
+import com.example.moviecomposeapp.constant.TEST_TAG_LOADING_ITEM
 
 @Composable
 fun LoadingItem(modifier: Modifier) {
@@ -15,7 +17,9 @@ fun LoadingItem(modifier: Modifier) {
         contentAlignment = Alignment.Center,
     ) {
         CircularProgressIndicator(
-            modifier = Modifier.size(50.dp),
+            modifier = Modifier
+                .size(50.dp)
+                .testTag(TEST_TAG_LOADING_ITEM),
         )
     }
 }

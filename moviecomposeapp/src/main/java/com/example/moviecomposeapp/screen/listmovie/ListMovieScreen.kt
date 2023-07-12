@@ -30,6 +30,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.paging.LoadState
@@ -41,6 +42,7 @@ import com.example.design.component.MovieOutlinedButton
 import com.example.design.dimension.Dimension
 import com.example.domain.entity.MovieEntity
 import com.example.moviecomposeapp.R
+import com.example.moviecomposeapp.constant.TEST_TAG_LAZY_COLUMN_MOVIE
 import com.example.moviecomposeapp.screen.ErrorItem
 import com.example.moviecomposeapp.screen.LoadingItem
 
@@ -128,7 +130,7 @@ fun ListMovieContent(
                 bottom = Dimension.Spacing_12,
                 start = Dimension.Spacing_20,
                 end = Dimension.Spacing_20,
-            ),
+            ).testTag(TEST_TAG_LAZY_COLUMN_MOVIE),
             state = lazyListState,
             verticalArrangement = Arrangement.spacedBy(Dimension.Spacing_12),
         ) {
@@ -139,6 +141,7 @@ fun ListMovieContent(
                 movies[index]?.let {
                     MovieItem(
                         modifier = Modifier
+                            .testTag(it.id.toString())
                             .fillMaxWidth()
                             .aspectRatio(3.5F / 2F),
                         movieEntity = it,
@@ -215,7 +218,7 @@ private fun LoadMoreErrorItem(
         modifier = modifier,
         contentAlignment = Alignment.Center,
     ) {
-        MovieOutlinedButton(modifier = Modifier, text = "Retry") {
+        MovieOutlinedButton(modifier = Modifier, text = stringResource(R.string.retry)) {
             onRetry.invoke()
         }
     }

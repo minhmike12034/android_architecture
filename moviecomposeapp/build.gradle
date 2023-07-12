@@ -105,12 +105,10 @@ dependencies {
     // Coil - load image
     implementation "io.coil-kt:coil-compose:$coil"
 
-    // Testing
-
-    // Test rules and transitive dependencies:
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_ui_test")
-    // Needed for createAndroidComposeRule, but not createComposeRule:
-    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_ui_test")
-
+    // Unit test
     testImplementation("org.junit.jupiter:junit-jupiter:$junit_test")
+
+    // Android testing
+    androidTestImplementation("androidx.compose.ui:ui-test-junit4:$compose_ui_test")
+    debugImplementation("androidx.compose.ui:ui-test-manifest:$compose_ui_test")
 }

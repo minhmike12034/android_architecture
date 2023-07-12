@@ -30,5 +30,5 @@ ext {
     compose_paging = "1.0.0-alpha19"
     compose_ui_test = "1.4.3"
 
-    junit_test = "5.9.1"
+    junit_test = "5.9.3"
 }
