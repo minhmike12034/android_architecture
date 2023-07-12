@@ -42,6 +42,8 @@ import com.example.design.component.MovieOutlinedButton
 import com.example.design.dimension.Dimension
 import com.example.domain.entity.MovieEntity
 import com.example.moviecomposeapp.R
+import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_DARK_MODE
+import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_LIGHT_MODE
 import com.example.moviecomposeapp.constant.TEST_TAG_LAZY_COLUMN_MOVIE
 import com.example.moviecomposeapp.screen.ErrorItem
 import com.example.moviecomposeapp.screen.LoadingItem
@@ -95,9 +97,13 @@ private fun MovieTopAppBar(
                     true -> Icons.Default.LightMode
                     else -> Icons.Default.DarkMode
                 }
+                val contentDescription = when (isDarkTheme) {
+                    true -> CONTENT_DESCRIPTION_DARK_MODE
+                    else -> CONTENT_DESCRIPTION_LIGHT_MODE
+                }
                 Icon(
                     modeIcon,
-                    contentDescription = null,
+                    contentDescription = contentDescription,
                     tint = Color.White,
                 )
             }

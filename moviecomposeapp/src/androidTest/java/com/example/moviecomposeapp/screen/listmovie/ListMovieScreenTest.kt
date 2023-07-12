@@ -1,6 +1,7 @@
 package com.example.moviecomposeapp.screen.listmovie
 
 import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.compose.ui.test.performScrollToIndex
@@ -10,6 +11,8 @@ import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.example.domain.entity.MovieEntity
+import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_DARK_MODE
+import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_LIGHT_MODE
 import com.example.moviecomposeapp.constant.TEST_TAG_LAZY_COLUMN_MOVIE
 import com.example.moviecomposeapp.constant.TEST_TAG_LOADING_ITEM
 import kotlinx.coroutines.flow.flowOf
@@ -25,6 +28,13 @@ class ListMovieScreenTest {
 
     private val textRefreshString = "Refresh"
     private val textRetryString = "Retry"
+
+    private val movie1 = MovieEntity(id = 1, title = "Spider man", posterPath = "")
+    private val movie2 = MovieEntity(id = 2, title = "Luffy", posterPath = "")
+    private val movie3 = MovieEntity(id = 3, title = "Naruto", posterPath = "")
+    private val movie4 = MovieEntity(id = 4, title = "Ichigo", posterPath = "")
+    private val movie5 = MovieEntity(id = 5, title = "Natsu", posterPath = "")
+    private val movieItems = listOf(movie1, movie2, movie3, movie4, movie5)
 
     @Test
     fun getListMovieInitialLoadingState() {
@@ -85,8 +95,9 @@ class ListMovieScreenTest {
     @Test
     fun getListMovieLoadMore() {
         // Given
-        val lazyPagingItems = flowOf<PagingData<MovieEntity>>(
-            PagingData.empty(
+        val lazyPagingItems = flowOf(
+            PagingData.from(
+                data = movieItems,
                 sourceLoadStates = LoadStates(
                     refresh = LoadState.NotLoading(false),
                     append = LoadState.Loading,
@@ -105,6 +116,12 @@ class ListMovieScreenTest {
         }
 
         // Then
+
+        // Scroll to final position
+        composeTestRule
+            .onNodeWithTag(TEST_TAG_LAZY_COLUMN_MOVIE)
+            .performScrollToIndex(movieItems.size - 1)
+
         composeTestRule
             .onNodeWithTag(TEST_TAG_LOADING_ITEM)
             .assertExists()
@@ -113,8 +130,9 @@ class ListMovieScreenTest {
     @Test
     fun getListMovieLoadMoreError() {
         // Given
-        val lazyPagingItems = flowOf<PagingData<MovieEntity>>(
-            PagingData.empty(
+        val lazyPagingItems = flowOf(
+            PagingData.from(
+                data = movieItems,
                 sourceLoadStates = LoadStates(
                     refresh = LoadState.NotLoading(false),
                     append = LoadState.Error(Exception()),
@@ -133,6 +151,12 @@ class ListMovieScreenTest {
         }
 
         // Then
+
+        // Scroll to final position
+        composeTestRule
+            .onNodeWithTag(TEST_TAG_LAZY_COLUMN_MOVIE)
+            .performScrollToIndex(movieItems.size - 1)
+
         composeTestRule
             .onNodeWithText(text = textRetryString)
             .assertExists()
@@ -141,12 +165,6 @@ class ListMovieScreenTest {
     @Test
     fun getListMovieAppendItem() {
         // Given
-        val movie1 = MovieEntity(id = 1, title = "Spider man", posterPath = "")
-        val movie2 = MovieEntity(id = 2, title = "Luffy", posterPath = "")
-        val movie3 = MovieEntity(id = 3, title = "Naruto", posterPath = "")
-        val movie4 = MovieEntity(id = 4, title = "Ichigo", posterPath = "")
-        val movie5 = MovieEntity(id = 5, title = "Natsu", posterPath = "")
-        val movieItems = listOf(movie1, movie2, movie3, movie4, movie5)
 
         val lazyPagingItems = flowOf(
             PagingData.from(
@@ -183,6 +201,46 @@ class ListMovieScreenTest {
         // Check bottom item
         composeTestRule
             .onNodeWithText(movie5.title!!)
+            .assertExists()
+    }
+
+    @Test
+    fun testLightTheme() {
+        // Given
+        val lazyPagingItems = flowOf<PagingData<MovieEntity>>(PagingData.empty())
+
+        composeTestRule.setContent {
+            ListMovieScreen(
+                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                onMovieItemClicked = {},
+                isDarkTheme = false,
+                onChangeTheme = {},
+            )
+        }
+
+        // Then
+        composeTestRule
+            .onNodeWithContentDescription(CONTENT_DESCRIPTION_LIGHT_MODE)
+            .assertExists()
+    }
+
+    @Test
+    fun testDarkTheme() {
+        // Given
+        val lazyPagingItems = flowOf<PagingData<MovieEntity>>(PagingData.empty())
+
+        composeTestRule.setContent {
+            ListMovieScreen(
+                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                onMovieItemClicked = {},
+                isDarkTheme = true,
+                onChangeTheme = {},
+            )
+        }
+
+        // Then
+        composeTestRule
+            .onNodeWithContentDescription(CONTENT_DESCRIPTION_DARK_MODE)
             .assertExists()
     }
 }
