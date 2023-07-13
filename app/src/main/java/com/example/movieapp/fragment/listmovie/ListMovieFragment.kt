@@ -12,6 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import com.example.domain.entity.MovieEntity
+import com.example.movieapp.R
 import com.example.movieapp.databinding.FragmentListMovieBinding
 import com.example.movieapp.fragment.listmovie.adapter.LoadMoreAdapter
 import com.example.movieapp.fragment.listmovie.adapter.MovieAdapter
@@ -60,9 +61,23 @@ class ListMovieFragment : Fragment(), MovieAdapter.MovieListener {
     }
 
     private fun setupView() {
+        binding.toolbar.inflateMenu(R.menu.menu)
+        binding.toolbar.setOnMenuItemClickListener {
+            when (it.itemId) {
+                R.id.action_login -> {
+                    findNavController().navigate(
+                        ListMovieFragmentDirections.actionListMovieFragmentToLoginFragment(),
+                    )
+                    return@setOnMenuItemClickListener true
+                }
+            }
+            return@setOnMenuItemClickListener false
+        }
+
         binding.buttonRefresh.setOnClickListener {
             movieAdapter.refresh()
         }
+
         movieAdapter = MovieAdapter(this)
         binding.rcvMovie.apply {
             adapter = movieAdapter.withLoadStateFooter(

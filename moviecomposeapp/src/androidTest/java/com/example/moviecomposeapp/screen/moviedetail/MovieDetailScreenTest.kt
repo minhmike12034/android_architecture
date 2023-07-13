@@ -1,11 +1,14 @@
 package com.example.moviecomposeapp.screen.moviedetail
 
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.design.theme.MovieAppTheme
 import com.example.domain.entity.MovieEntity
 import com.example.domain.error.ErrorEntity
+import com.example.moviecomposeapp.R
 import com.example.moviecomposeapp.constant.TEST_TAG_LOADING_ITEM
 import com.example.moviecomposeapp.screen.moviedetail.state.MovieState
 import org.junit.Rule
@@ -16,20 +19,20 @@ import org.junit.runner.RunWith
 class MovieDetailScreenTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule()
-
-    private val textRefreshString = "Refresh"
+    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
     @Test
     fun getMovieDetailLoadingState() {
         // Given
         val state = MovieState.Loading
         composeTestRule.setContent {
-            MovieDetailScreen(
-                movieState = state,
-                onRefreshClick = {},
-                onBackClick = {},
-            )
+            MovieAppTheme {
+                MovieDetailScreen(
+                    movieState = state,
+                    onRefreshClick = {},
+                    onBackClick = {},
+                )
+            }
         }
 
         // Then
@@ -50,11 +53,13 @@ class MovieDetailScreenTest {
         )
         val state = MovieState.GetMovieDetailSuccess(movie)
         composeTestRule.setContent {
-            MovieDetailScreen(
-                movieState = state,
-                onRefreshClick = {},
-                onBackClick = {},
-            )
+            MovieAppTheme {
+                MovieDetailScreen(
+                    movieState = state,
+                    onRefreshClick = {},
+                    onBackClick = {},
+                )
+            }
         }
 
         // Then
@@ -74,18 +79,22 @@ class MovieDetailScreenTest {
     @Test
     fun getMovieDetailFailureState() {
         // Given
-        val state = MovieState.GetMovieDetailFailure(ErrorEntity.NetworkErrorEntity)
+        val state = MovieState.GetMovieDetailFailure(ErrorEntity.NetworkErrorEntity(""))
         composeTestRule.setContent {
-            MovieDetailScreen(
-                movieState = state,
-                onRefreshClick = {},
-                onBackClick = {},
-            )
+            MovieAppTheme {
+                MovieDetailScreen(
+                    movieState = state,
+                    onRefreshClick = {},
+                    onBackClick = {},
+                )
+            }
         }
 
         // Then
         composeTestRule
-            .onNodeWithText(text = textRefreshString)
+            .onNodeWithText(
+                text = composeTestRule.activity.getString(R.string.refresh),
+            )
             .assertExists()
     }
 }

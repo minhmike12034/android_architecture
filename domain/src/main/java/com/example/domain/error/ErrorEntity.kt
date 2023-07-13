@@ -1,15 +1,15 @@
 package com.example.domain.error
 
-sealed class ErrorEntity {
+sealed class ErrorEntity(val message: String? = null) {
     // Data Error entity
-    object NetworkErrorEntity : ErrorEntity()
-    object DatabaseErrorEntity : ErrorEntity()
-
-    // Unknown Error
-    object UnknownErrorEntity : ErrorEntity()
+    class NetworkErrorEntity(message: String) : ErrorEntity(message)
+    class DatabaseErrorEntity(message: String) : ErrorEntity(message)
 
     // Logic Error Entity
-    sealed class LogicEntity : ErrorEntity()
-    object LogicAEntity : LogicEntity()
-    object LogicBEntity : LogicEntity()
+    sealed class LogicErrorEntity : ErrorEntity()
+    object UserNameValidateErrorEntity : LogicErrorEntity()
+    object PasswordValidateErrorEntity : LogicErrorEntity()
+
+    // Unknown Error
+    class UnknownErrorEntity(message: String) : ErrorEntity(message)
 }

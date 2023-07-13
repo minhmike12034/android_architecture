@@ -1,10 +1,13 @@
 package com.example.movieapp.di
 
+import com.example.domain.repository.AuthRepository
 import com.example.domain.repository.MovieRepository
 import com.example.domain.usecase.GetMovieUseCase
 import com.example.domain.usecase.GetPopularMoviesUseCase
+import com.example.domain.usecase.LoginUseCase
 import com.example.domain.usecase.impl.GetMovieUseCaseImpl
 import com.example.domain.usecase.impl.GetPopularMoviesUseCaseImpl
+import com.example.domain.usecase.impl.LoginUseCaseImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,5 +29,12 @@ object UseCaseModule {
         movieRepository: MovieRepository,
     ): GetMovieUseCase {
         return GetMovieUseCaseImpl(movieRepository)
+    }
+
+    @Provides
+    fun provideLoginUseCase(
+        authRepository: AuthRepository,
+    ): LoginUseCase {
+        return LoginUseCaseImpl(authRepository)
     }
 }

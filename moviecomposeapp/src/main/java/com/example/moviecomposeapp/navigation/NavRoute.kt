@@ -8,6 +8,8 @@ sealed class NavRoute(val path: String) {
         const val movieId = "movieId"
     }
 
+    object Login : NavRoute(path = "login")
+
     // build navigation path (for screen navigation)
     fun withArgs(vararg args: String): String {
         return buildString {

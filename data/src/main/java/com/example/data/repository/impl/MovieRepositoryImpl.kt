@@ -29,6 +29,7 @@ class MovieRepositoryImpl @Inject constructor(
         }.flow
     }
 
+    // This is DATA LOGIC
     override suspend fun getMovie(movieId: String): Either<ErrorEntity, MovieEntity> {
         return try {
             // Get movie from server
@@ -44,7 +45,7 @@ class MovieRepositoryImpl @Inject constructor(
                 is Either.Success -> {
                     when (either.value != null) {
                         true -> Either.success(either.value!!.toMovieEntity())
-                        else -> Either.fail(ErrorEntity.DatabaseErrorEntity)
+                        else -> Either.fail(ErrorEntity.DatabaseErrorEntity("Cannot found movie record"))
                     }
                 }
 

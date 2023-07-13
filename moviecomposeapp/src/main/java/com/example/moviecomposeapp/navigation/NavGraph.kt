@@ -7,7 +7,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
+import com.example.moviecomposeapp.navigation.NavRoute.MovieDetail.movieId
 import com.example.moviecomposeapp.route.ListMovieRoute
+import com.example.moviecomposeapp.route.LoginRoute
 import com.example.moviecomposeapp.route.MovieDetailRoute
 
 @Composable
@@ -33,15 +35,20 @@ fun MainNavigationGraph(
                 },
                 isDarkTheme = isDarkTheme,
                 onChangeTheme = onChangeTheme,
+                onLoginClick = {
+                    navController.navigate(
+                        NavRoute.Login.path,
+                    )
+                },
             )
         }
 
         composable(
             route = NavRoute.MovieDetail.withArgsFormat(
-                NavRoute.MovieDetail.movieId,
+                movieId,
             ),
             arguments = listOf(
-                navArgument(NavRoute.MovieDetail.movieId) {
+                navArgument(movieId) {
                     type = NavType.StringType
                     defaultValue = ""
                 },
@@ -50,6 +57,14 @@ fun MainNavigationGraph(
             MovieDetailRoute(onBackClick = {
                 navController.popBackStack()
             })
+        }
+
+        composable(route = NavRoute.Login.path) {
+            LoginRoute(
+                onBackClick = {
+                    navController.popBackStack()
+                },
+            )
         }
     }
 }

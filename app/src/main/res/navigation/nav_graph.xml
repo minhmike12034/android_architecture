@@ -18,6 +18,9 @@
                 android:defaultValue=""
                 app:argType="string" />
         </action>
+        <action
+            android:id="@+id/action_listMovieFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
     </fragment>
 
     <fragment
@@ -25,4 +28,11 @@
         android:name="com.example.movieapp.fragment.moviedetail.MovieDetailFragment"
         android:label="@string/movie_detail"
         tools:layout="@layout/fragment_movie" />
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.movieapp.fragment.login.LoginFragment"
+        android:label="@string/login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

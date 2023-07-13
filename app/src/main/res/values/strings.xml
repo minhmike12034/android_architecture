@@ -6,4 +6,11 @@
     <string name="movie_title">Title: %1$s</string>
     <string name="movie_overview">Overview: %1$s</string>
     <string name="movie_status">Status: %1$s</string>
+    <string name="password">Password</string>
+    <string name="login">Login</string>
+    <string name="user_name">User name</string>
+    <string name="user_name_is_wrong">User name is not enough length</string>
+    <string name="password_is_wrong">Password is not enough length</string>
+    <string name="unknown_message">Unknown message</string>
+    <string name="user_login_success">%1$s login success</string>
 </resources>

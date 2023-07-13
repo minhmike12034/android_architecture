@@ -14,6 +14,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DarkMode
 import androidx.compose.material.icons.filled.LightMode
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -44,6 +45,7 @@ import com.example.domain.entity.MovieEntity
 import com.example.moviecomposeapp.R
 import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_DARK_MODE
 import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_LIGHT_MODE
+import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_LOGIN_action
 import com.example.moviecomposeapp.constant.TEST_TAG_LAZY_COLUMN_MOVIE
 import com.example.moviecomposeapp.screen.ErrorItem
 import com.example.moviecomposeapp.screen.LoadingItem
@@ -53,6 +55,7 @@ import com.example.moviecomposeapp.screen.LoadingItem
 internal fun ListMovieScreen(
     listPopularMovies: LazyPagingItems<MovieEntity>,
     onMovieItemClicked: (movieId: String) -> Unit,
+    onLoginClick: () -> Unit,
     isDarkTheme: Boolean,
     onChangeTheme: () -> Unit,
 ) {
@@ -62,6 +65,7 @@ internal fun ListMovieScreen(
             MovieTopAppBar(
                 isDarkTheme = isDarkTheme,
                 onChangeTheme = onChangeTheme,
+                onLoginClick = onLoginClick,
             )
         },
         content = { paddingValues ->
@@ -81,6 +85,7 @@ internal fun ListMovieScreen(
 private fun MovieTopAppBar(
     isDarkTheme: Boolean,
     onChangeTheme: () -> Unit,
+    onLoginClick: () -> Unit,
 ) {
     TopAppBar(
         title = {
@@ -104,6 +109,15 @@ private fun MovieTopAppBar(
                 Icon(
                     modeIcon,
                     contentDescription = contentDescription,
+                    tint = Color.White,
+                )
+            }
+            IconButton(onClick = {
+                onLoginClick()
+            }) {
+                Icon(
+                    Icons.Default.Person,
+                    contentDescription = CONTENT_DESCRIPTION_LOGIN_action,
                     tint = Color.White,
                 )
             }

@@ -1,6 +1,7 @@
 package com.example.moviecomposeapp.screen.listmovie
 
-import androidx.compose.ui.test.junit4.createComposeRule
+import androidx.activity.ComponentActivity
+import androidx.compose.ui.test.junit4.createAndroidComposeRule
 import androidx.compose.ui.test.onNodeWithContentDescription
 import androidx.compose.ui.test.onNodeWithTag
 import androidx.compose.ui.test.onNodeWithText
@@ -10,7 +11,9 @@ import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.compose.collectAsLazyPagingItems
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import com.example.design.theme.MovieAppTheme
 import com.example.domain.entity.MovieEntity
+import com.example.moviecomposeapp.R
 import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_DARK_MODE
 import com.example.moviecomposeapp.constant.CONTENT_DESCRIPTION_LIGHT_MODE
 import com.example.moviecomposeapp.constant.TEST_TAG_LAZY_COLUMN_MOVIE
@@ -24,10 +27,7 @@ import org.junit.runner.RunWith
 class ListMovieScreenTest {
 
     @get:Rule
-    val composeTestRule = createComposeRule()
-
-    private val textRefreshString = "Refresh"
-    private val textRetryString = "Retry"
+    val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
     private val movie1 = MovieEntity(id = 1, title = "Spider man", posterPath = "")
     private val movie2 = MovieEntity(id = 2, title = "Luffy", posterPath = "")
@@ -50,12 +50,15 @@ class ListMovieScreenTest {
         )
 
         composeTestRule.setContent {
-            ListMovieScreen(
-                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
-                onMovieItemClicked = {},
-                isDarkTheme = false,
-                onChangeTheme = {},
-            )
+            MovieAppTheme {
+                ListMovieScreen(
+                    listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                    onMovieItemClicked = {},
+                    isDarkTheme = false,
+                    onChangeTheme = {},
+                    onLoginClick = {},
+                )
+            }
         }
 
         // Then
@@ -78,17 +81,20 @@ class ListMovieScreenTest {
         )
 
         composeTestRule.setContent {
-            ListMovieScreen(
-                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
-                onMovieItemClicked = {},
-                isDarkTheme = false,
-                onChangeTheme = {},
-            )
+            MovieAppTheme {
+                ListMovieScreen(
+                    listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                    onMovieItemClicked = {},
+                    isDarkTheme = false,
+                    onChangeTheme = {},
+                    onLoginClick = {},
+                )
+            }
         }
 
         // Then
         composeTestRule
-            .onNodeWithText(text = textRefreshString)
+            .onNodeWithText(text = composeTestRule.activity.getString(R.string.refresh))
             .assertExists()
     }
 
@@ -107,12 +113,15 @@ class ListMovieScreenTest {
         )
 
         composeTestRule.setContent {
-            ListMovieScreen(
-                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
-                onMovieItemClicked = {},
-                isDarkTheme = false,
-                onChangeTheme = {},
-            )
+            MovieAppTheme {
+                ListMovieScreen(
+                    listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                    onMovieItemClicked = {},
+                    isDarkTheme = false,
+                    onChangeTheme = {},
+                    onLoginClick = {},
+                )
+            }
         }
 
         // Then
@@ -142,12 +151,15 @@ class ListMovieScreenTest {
         )
 
         composeTestRule.setContent {
-            ListMovieScreen(
-                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
-                onMovieItemClicked = {},
-                isDarkTheme = false,
-                onChangeTheme = {},
-            )
+            MovieAppTheme {
+                ListMovieScreen(
+                    listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                    onMovieItemClicked = {},
+                    isDarkTheme = false,
+                    onChangeTheme = {},
+                    onLoginClick = {},
+                )
+            }
         }
 
         // Then
@@ -158,7 +170,7 @@ class ListMovieScreenTest {
             .performScrollToIndex(movieItems.size - 1)
 
         composeTestRule
-            .onNodeWithText(text = textRetryString)
+            .onNodeWithText(text = composeTestRule.activity.getString(R.string.retry))
             .assertExists()
     }
 
@@ -178,12 +190,15 @@ class ListMovieScreenTest {
         )
 
         composeTestRule.setContent {
-            ListMovieScreen(
-                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
-                onMovieItemClicked = {},
-                isDarkTheme = false,
-                onChangeTheme = {},
-            )
+            MovieAppTheme {
+                ListMovieScreen(
+                    listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                    onMovieItemClicked = {},
+                    isDarkTheme = false,
+                    onChangeTheme = {},
+                    onLoginClick = {},
+                )
+            }
         }
 
         // Then
@@ -210,12 +225,15 @@ class ListMovieScreenTest {
         val lazyPagingItems = flowOf<PagingData<MovieEntity>>(PagingData.empty())
 
         composeTestRule.setContent {
-            ListMovieScreen(
-                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
-                onMovieItemClicked = {},
-                isDarkTheme = false,
-                onChangeTheme = {},
-            )
+            MovieAppTheme {
+                ListMovieScreen(
+                    listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                    onMovieItemClicked = {},
+                    isDarkTheme = false,
+                    onChangeTheme = {},
+                    onLoginClick = {},
+                )
+            }
         }
 
         // Then
@@ -230,12 +248,15 @@ class ListMovieScreenTest {
         val lazyPagingItems = flowOf<PagingData<MovieEntity>>(PagingData.empty())
 
         composeTestRule.setContent {
-            ListMovieScreen(
-                listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
-                onMovieItemClicked = {},
-                isDarkTheme = true,
-                onChangeTheme = {},
-            )
+            MovieAppTheme {
+                ListMovieScreen(
+                    listPopularMovies = lazyPagingItems.collectAsLazyPagingItems(),
+                    onMovieItemClicked = {},
+                    isDarkTheme = true,
+                    onChangeTheme = {},
+                    onLoginClick = {},
+                )
+            }
         }
 
         // Then
