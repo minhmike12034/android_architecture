@@ -9,12 +9,15 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import com.example.design.color.LocalCustomColorsPalette
 import com.example.design.component.MovieOutlinedButton
 import com.example.design.component.MovieSolidButton
 import com.example.design.component.MovieTextButton
@@ -77,6 +80,20 @@ fun ListMovieButton(modifier: Modifier) {
             modifier = Modifier.fillMaxWidth(),
             text = "Text Button",
         ) {
+        }
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_16))
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            colors = ButtonDefaults.buttonColors(
+                LocalCustomColorsPalette.current.customButtonRed,
+            ),
+            onClick = {},
+        ) {
+            Text(
+                text = "Custom color outside material",
+                color = Color.White,
+            )
         }
 
         Spacer(modifier = Modifier.height(Dimension.Spacing_16))

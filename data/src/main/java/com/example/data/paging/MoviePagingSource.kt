@@ -36,7 +36,6 @@ class MoviePagingSource @Inject constructor(
             PAGE_LIMIT,
         ).data
             .map { it.toMovieEntity() }
-            .orEmpty()
     }
 
     private fun getKey(start: Int, listMovie: List<MovieEntity>): Pair<Int?, Int?> {

@@ -9,7 +9,4 @@ sealed class ErrorEntity(val message: String? = null) {
     sealed class LogicErrorEntity : ErrorEntity()
     object UserNameValidateErrorEntity : LogicErrorEntity()
     object PasswordValidateErrorEntity : LogicErrorEntity()
-
-    // Unknown Error
-    class UnknownErrorEntity(message: String) : ErrorEntity(message)
 }
