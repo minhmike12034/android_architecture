@@ -16,14 +16,26 @@ import androidx.core.view.WindowCompat
 
 private val DarkColorScheme = darkColorScheme(
     primary = LightBlue300,
-//    onPrimary = ...
-//    secondary = ...
+    /* Other default colors to override
+       background = Color.White,
+       surface = Color.White,
+       onPrimary = Color.White,
+       onSecondary = Color.Black,
+       onBackground = Color.Black,
+       onSurface = Color.Black,
+       */
 )
 
 private val LightColorScheme = lightColorScheme(
     primary = LightBlue500,
-//    onPrimary = ...
-//    secondary = ...
+    /* Other default colors to override
+         background = Color.White,
+         surface = Color.White,
+         onPrimary = Color.White,
+         onSecondary = Color.Black,
+         onBackground = Color.Black,
+         onSurface = Color.Black,
+         */
 )
 
 // Custom outside material theme

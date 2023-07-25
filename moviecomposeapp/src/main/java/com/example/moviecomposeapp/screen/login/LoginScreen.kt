@@ -2,10 +2,12 @@ package com.example.moviecomposeapp.screen.login
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -25,6 +27,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import com.example.design.component.MovieSolidButton
 import com.example.design.dimension.Dimension
+import com.example.design.windowinfo.WindowInfo
+import com.example.design.windowinfo.rememberWindowInfo
 import com.example.domain.error.ErrorEntity
 import com.example.moviecomposeapp.R
 
@@ -127,9 +131,47 @@ private fun ShowMessage(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LoginContent(
+    modifier: Modifier = Modifier,
+    userName: String,
+    password: String,
+    onUserNameChanged: (value: String) -> Unit,
+    onPasswordChanged: (value: String) -> Unit,
+    onLoginClick: () -> Unit,
+    loginResult: LoginResult?,
+) {
+    val windowInfo = rememberWindowInfo()
+    when (windowInfo.screenWidthInfo) {
+        is WindowInfo.WindowType.Expanded -> {
+            LoginContentExpand(
+                modifier = modifier,
+                userName = userName,
+                password = password,
+                onUserNameChanged = onUserNameChanged,
+                onPasswordChanged = onPasswordChanged,
+                onLoginClick = onLoginClick,
+                loginResult = loginResult,
+            )
+        }
+
+        else -> {
+            LoginContentCompact(
+                modifier = modifier,
+                userName = userName,
+                password = password,
+                onUserNameChanged = onUserNameChanged,
+                onPasswordChanged = onPasswordChanged,
+                onLoginClick = onLoginClick,
+                loginResult = loginResult,
+            )
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LoginContentCompact(
     modifier: Modifier = Modifier,
     userName: String,
     password: String,
@@ -150,7 +192,7 @@ private fun LoginContent(
             },
         )
 
-        Spacer(modifier = Modifier.height(Dimension.Spacing_20))
+        Spacer(modifier = Modifier.width(Dimension.Spacing_20))
 
         TextField(
             modifier = Modifier.fillMaxWidth(),
@@ -161,6 +203,58 @@ private fun LoginContent(
             },
             visualTransformation = PasswordVisualTransformation(),
         )
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_20))
+
+        MovieSolidButton(
+            modifier = Modifier.fillMaxWidth(),
+            text = stringResource(R.string.login),
+        ) {
+            onLoginClick.invoke()
+        }
+
+        Spacer(modifier = Modifier.height(Dimension.Spacing_20))
+
+        loginResult?.let { HandleLoginResult(it) }
+    }
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun LoginContentExpand(
+    modifier: Modifier = Modifier,
+    userName: String,
+    password: String,
+    onUserNameChanged: (value: String) -> Unit,
+    onPasswordChanged: (value: String) -> Unit,
+    onLoginClick: () -> Unit,
+    loginResult: LoginResult?,
+) {
+    Column(
+        modifier = modifier.padding(Dimension.Spacing_20),
+    ) {
+        Row {
+            TextField(
+                modifier = Modifier.weight(1F),
+                value = userName,
+                onValueChange = onUserNameChanged,
+                placeholder = {
+                    Text(stringResource(R.string.user_name))
+                },
+            )
+
+            Spacer(modifier = Modifier.weight(0.1F))
+
+            TextField(
+                modifier = Modifier.weight(1F),
+                value = password,
+                onValueChange = onPasswordChanged,
+                placeholder = {
+                    Text(stringResource(R.string.password))
+                },
+                visualTransformation = PasswordVisualTransformation(),
+            )
+        }
 
         Spacer(modifier = Modifier.height(Dimension.Spacing_20))
 
