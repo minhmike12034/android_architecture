@@ -17,11 +17,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import com.example.design.color.LocalCustomColorsPalette
 import com.example.design.component.MovieOutlinedButton
 import com.example.design.component.MovieSolidButton
 import com.example.design.component.MovieTextButton
 import com.example.design.dimension.Dimension
+import com.example.design.theme.LocalMovieAppColorsPalette
 
 @Composable
 fun ListMovieButton(modifier: Modifier) {
@@ -86,7 +86,7 @@ fun ListMovieButton(modifier: Modifier) {
         Button(
             modifier = Modifier.fillMaxWidth(),
             colors = ButtonDefaults.buttonColors(
-                LocalCustomColorsPalette.current.customButtonRed,
+                LocalMovieAppColorsPalette.current.buttonRed,
             ),
             onClick = {},
         ) {

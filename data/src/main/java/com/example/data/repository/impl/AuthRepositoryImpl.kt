@@ -1,5 +1,6 @@
 package com.example.data.repository.impl
 
+import com.example.data.mapper.toNetworkErrorEntity
 import com.example.domain.either.Either
 import com.example.domain.entity.UserEntity
 import com.example.domain.error.ErrorEntity
@@ -9,7 +10,7 @@ import javax.inject.Inject
 class AuthRepositoryImpl @Inject constructor() : AuthRepository {
 
     // Fake data
-    // This is DATA LOGIC
+    // TODO This is DATA LOGIC
     override suspend fun login(
         userName: String,
         password: String,
@@ -21,7 +22,7 @@ class AuthRepositoryImpl @Inject constructor() : AuthRepository {
 
             else -> {
                 // This is fake response from server side
-                Either.fail(ErrorEntity.NetworkErrorEntity("Incorrect information"))
+                Either.fail(Exception("Incorrect information").toNetworkErrorEntity())
             }
         }
     }

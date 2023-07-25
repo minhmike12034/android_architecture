@@ -13,8 +13,6 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalView
 import androidx.core.view.WindowCompat
-import com.example.design.color.CustomColorsPalette
-import com.example.design.color.LocalCustomColorsPalette
 
 private val DarkColorScheme = darkColorScheme(
     primary = LightBlue300,
@@ -29,12 +27,12 @@ private val LightColorScheme = lightColorScheme(
 )
 
 // Custom outside material theme
-private val OnLightCustomColorsPalette = CustomColorsPalette(
-    customButtonRed = LightRed300,
+private val OnLightMovieAppColorsPalette = MovieAppColorsPalette(
+    buttonRed = LightRed300,
 )
 
-private val OnDarkCustomColorsPalette = CustomColorsPalette(
-    customButtonRed = DarkRed700,
+private val OnDarkMovieAppColorsPalette = MovieAppColorsPalette(
+    buttonRed = DarkRed700,
 )
 
 @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -55,14 +53,13 @@ fun MovieAppTheme(
             WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
         }
     }
-    val customColorsPalette =
-        if (darkTheme) {
-            OnDarkCustomColorsPalette
-        } else {
-            OnLightCustomColorsPalette
+    val movieAppColorsPalette =
+        when {
+            darkTheme -> OnDarkMovieAppColorsPalette
+            else -> OnLightMovieAppColorsPalette
         }
     CompositionLocalProvider(
-        LocalCustomColorsPalette provides customColorsPalette,
+        LocalMovieAppColorsPalette provides movieAppColorsPalette,
     ) {
         MaterialTheme(
             colorScheme = colorScheme,

@@ -14,6 +14,21 @@ val Typography = Typography(
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp,
     ),
-//    bodyMedium = ...,
-//    bodySmall = ...,
+    bodyMedium = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 14.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.5.sp,
+    ),
+    bodySmall = TextStyle(
+        fontFamily = FontFamily.Default,
+        fontWeight = FontWeight.Normal,
+        fontSize = 12.sp,
+        lineHeight = 16.sp,
+        letterSpacing = 0.5.sp,
+    ),
+//  labelLarge = ...,
+//  labelMedium = ...,
+//  labelSmall = ...,
 )

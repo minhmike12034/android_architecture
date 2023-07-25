@@ -14,7 +14,7 @@ class LoginUseCaseImpl @Inject constructor(
     private val authRepository: AuthRepository,
 ) : LoginUseCase {
 
-    // This is BUSINESS LOGIC
+    // TODO This is BUSINESS LOGIC -- return LogicErrorEntity
     override suspend fun execute(
         userName: String,
         password: String,

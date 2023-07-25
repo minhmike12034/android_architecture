@@ -47,7 +47,7 @@ class LoginFragment : Fragment() {
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    // This is VIEW LOGIC
+    // TODO This is VIEW LOGIC
     private fun handleLoginResult(loginResult: LoginResult) {
         when (loginResult) {
             is LoginResult.LoginSuccess -> showMessage(
