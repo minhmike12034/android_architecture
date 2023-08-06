@@ -1,9 +1,9 @@
 package com.example.data.di
 
 import com.example.data.database.datasource.LocalMovieDataSource
-import com.example.data.network.api.MovieService
-import com.example.data.repository.impl.AuthRepositoryImpl
-import com.example.data.repository.impl.MovieRepositoryImpl
+import com.example.data.service.movie.MovieService
+import com.example.data.repository.AuthRepositoryImpl
+import com.example.data.repository.MovieRepositoryImpl
 import com.example.domain.repository.AuthRepository
 import com.example.domain.repository.MovieRepository
 import dagger.Module

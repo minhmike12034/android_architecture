@@ -4,7 +4,7 @@ import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.example.data.BuildConfig
 import com.example.data.mapper.toMovieEntity
-import com.example.data.network.api.MovieService
+import com.example.data.service.movie.MovieService
 import com.example.domain.entity.MovieEntity
 import javax.inject.Inject
 

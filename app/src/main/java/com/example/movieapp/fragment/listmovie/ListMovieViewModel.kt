@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.paging.cachedIn
 import com.example.data.network.DispatcherProvider
-import com.example.domain.usecase.GetPopularMoviesUseCase
+import com.example.domain.usecase.getpopularmovie.GetPopularMoviesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject

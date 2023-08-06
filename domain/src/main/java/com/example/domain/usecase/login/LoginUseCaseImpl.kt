@@ -1,10 +1,9 @@
-package com.example.domain.usecase.impl
+package com.example.domain.usecase.login
 
 import com.example.domain.either.Either
 import com.example.domain.entity.UserEntity
 import com.example.domain.error.ErrorEntity
 import com.example.domain.repository.AuthRepository
-import com.example.domain.usecase.LoginUseCase
 import javax.inject.Inject
 
 private const val USER_LIMIT_LENGTH = 4

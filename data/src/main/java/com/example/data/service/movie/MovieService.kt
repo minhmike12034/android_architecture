@@ -1,4 +1,4 @@
-package com.example.data.network.api
+package com.example.data.service.movie
 
 import com.example.data.network.model.MovieDto
 import com.example.data.network.response.BaseListResponse

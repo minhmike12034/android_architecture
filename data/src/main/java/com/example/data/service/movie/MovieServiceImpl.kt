@@ -1,7 +1,6 @@
-package com.example.data.network.api.impl
+package com.example.data.service.movie
 
 import com.example.data.network.api.MovieApi
-import com.example.data.network.api.MovieService
 import com.example.data.network.model.MovieDto
 import com.example.data.network.response.BaseListResponse
 import javax.inject.Inject
