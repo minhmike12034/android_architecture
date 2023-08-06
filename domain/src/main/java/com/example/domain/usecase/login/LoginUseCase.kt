@@ -1,4 +1,4 @@
-package com.example.domain.usecase
+package com.example.domain.usecase.login
 
 import com.example.domain.either.Either
 import com.example.domain.entity.UserEntity

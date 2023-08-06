@@ -1,4 +1,4 @@
-package com.example.data.repository.impl
+package com.example.data.repository
 
 import com.example.data.mapper.toNetworkErrorEntity
 import com.example.domain.either.Either

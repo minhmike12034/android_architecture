@@ -1,4 +1,4 @@
-package com.example.data.repository.impl
+package com.example.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
@@ -9,7 +9,7 @@ import com.example.data.database.model.MovieRecord
 import com.example.data.mapper.toDatabaseErrorEntity
 import com.example.data.mapper.toMovieEntity
 import com.example.data.mapper.toMovieRecord
-import com.example.data.network.api.MovieService
+import com.example.data.service.movie.MovieService
 import com.example.data.paging.MoviePagingSource
 import com.example.domain.either.Either
 import com.example.domain.entity.MovieEntity

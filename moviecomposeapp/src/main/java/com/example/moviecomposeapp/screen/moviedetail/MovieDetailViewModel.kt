@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.network.DispatcherProvider
 import com.example.domain.either.Either
-import com.example.domain.usecase.GetMovieUseCase
+import com.example.domain.usecase.getmovie.GetMovieUseCase
 import com.example.moviecomposeapp.screen.moviedetail.state.MovieState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow

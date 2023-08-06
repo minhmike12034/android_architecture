@@ -1,10 +1,9 @@
-package com.example.domain.usecase.impl
+package com.example.domain.usecase.getmovie
 
 import com.example.domain.either.Either
 import com.example.domain.entity.MovieEntity
 import com.example.domain.error.ErrorEntity
 import com.example.domain.repository.MovieRepository
-import com.example.domain.usecase.GetMovieUseCase
 import javax.inject.Inject
 
 class GetMovieUseCaseImpl @Inject constructor(

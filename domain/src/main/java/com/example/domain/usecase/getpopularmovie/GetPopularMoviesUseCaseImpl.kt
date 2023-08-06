@@ -1,9 +1,9 @@
-package com.example.domain.usecase.impl
+package com.example.domain.usecase.getpopularmovie
 
 import androidx.paging.PagingData
 import com.example.domain.entity.MovieEntity
 import com.example.domain.repository.MovieRepository
-import com.example.domain.usecase.GetPopularMoviesUseCase
+import com.example.domain.usecase.getpopularmovie.GetPopularMoviesUseCase
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 

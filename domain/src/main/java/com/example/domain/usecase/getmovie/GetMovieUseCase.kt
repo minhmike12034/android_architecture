@@ -1,4 +1,4 @@
-package com.example.domain.usecase
+package com.example.domain.usecase.getmovie
 
 import com.example.domain.either.Either
 import com.example.domain.entity.MovieEntity

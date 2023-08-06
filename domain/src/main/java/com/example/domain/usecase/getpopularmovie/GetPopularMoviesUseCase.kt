@@ -1,4 +1,4 @@
-package com.example.domain.usecase
+package com.example.domain.usecase.getpopularmovie
 
 import androidx.paging.PagingData
 import com.example.domain.entity.MovieEntity

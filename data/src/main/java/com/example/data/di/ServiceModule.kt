@@ -1,8 +1,8 @@
 package com.example.data.di
 
 import com.example.data.network.api.MovieApi
-import com.example.data.network.api.MovieService
-import com.example.data.network.api.impl.MovieServiceImpl
+import com.example.data.service.movie.MovieService
+import com.example.data.service.movie.MovieServiceImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
