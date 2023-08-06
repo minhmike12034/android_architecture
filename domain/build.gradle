@@ -1,37 +1,19 @@
 plugins {
-    id 'com.android.library'
-    id 'org.jetbrains.kotlin.android'
     id 'kotlin-kapt'
-    id 'com.google.dagger.hilt.android'
+    id 'kotlin'
+    id 'java-library'
 }
 
 apply from: "$rootDir/dependencies.gradle"
 
-android {
-    namespace 'com.example.domain'
-    compileSdk compile_sdk
-
-    compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
-    }
-
-    kotlinOptions {
-        jvmTarget = '17'
-    }
-
-    java {
-        toolchain {
-            languageVersion.set(JavaLanguageVersion.of(17))
-        }
-    }
+java {
+    sourceCompatibility = JavaVersion.VERSION_17
+    targetCompatibility = JavaVersion.VERSION_17
 }
 
 dependencies {
-    // Hilt
-    implementation "com.google.dagger:hilt-android:$hilt"
-    kapt "com.google.dagger:hilt-compiler:$hilt"
+    implementation 'javax.inject:javax.inject:1'
 
     // Paging
-    implementation "androidx.paging:paging-runtime:$paging"
+    implementation "androidx.paging:paging-common:$paging"
 }
