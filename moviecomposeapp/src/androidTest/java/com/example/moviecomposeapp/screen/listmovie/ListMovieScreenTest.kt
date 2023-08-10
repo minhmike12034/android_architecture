@@ -29,11 +29,11 @@ class ListMovieScreenTest {
     @get:Rule
     val composeTestRule = createAndroidComposeRule<ComponentActivity>()
 
-    private val movie1 = MovieEntity(id = 1, title = "Spider man", posterPath = "")
-    private val movie2 = MovieEntity(id = 2, title = "Luffy", posterPath = "")
-    private val movie3 = MovieEntity(id = 3, title = "Naruto", posterPath = "")
-    private val movie4 = MovieEntity(id = 4, title = "Ichigo", posterPath = "")
-    private val movie5 = MovieEntity(id = 5, title = "Natsu", posterPath = "")
+    private val movie1 = MovieEntity(id = "1", title = "Spider man", posterPath = "")
+    private val movie2 = MovieEntity(id = "2", title = "Luffy", posterPath = "")
+    private val movie3 = MovieEntity(id = "3", title = "Naruto", posterPath = "")
+    private val movie4 = MovieEntity(id = "4", title = "Ichigo", posterPath = "")
+    private val movie5 = MovieEntity(id = "5", title = "Natsu", posterPath = "")
     private val movieItems = listOf(movie1, movie2, movie3, movie4, movie5)
 
     @Test

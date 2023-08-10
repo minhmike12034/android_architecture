@@ -45,7 +45,7 @@ class MovieDetailScreenTest {
     fun getMovieDetailSuccessState() {
         // Given
         val movie = MovieEntity(
-            1,
+            "1",
             "https://wallpapercg.com/media/ts_orig/12093.webp",
             "Marvel",
             "Spider man",
