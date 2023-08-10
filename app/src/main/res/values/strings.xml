@@ -9,8 +9,8 @@
     <string name="password">Password</string>
     <string name="login">Login</string>
     <string name="user_name">User name</string>
-    <string name="user_name_is_wrong">User name is not enough length</string>
-    <string name="password_is_wrong">Password is not enough length</string>
+    <string name="username_validation_error">Username must have at least 4 characters</string>
+    <string name="password_validation_error">Password must have at least 4 characters</string>
     <string name="unknown_message">Unknown message</string>
     <string name="user_login_success">%1$s login success</string>
 </resources>

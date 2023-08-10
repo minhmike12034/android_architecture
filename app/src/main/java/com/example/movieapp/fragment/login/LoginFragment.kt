@@ -47,7 +47,6 @@ class LoginFragment : Fragment() {
             .launchIn(viewLifecycleOwner.lifecycleScope)
     }
 
-    // TODO This is VIEW LOGIC
     private fun handleLoginResult(loginResult: LoginResult) {
         when (loginResult) {
             is LoginResult.LoginSuccess -> showMessage(
@@ -59,8 +58,8 @@ class LoginFragment : Fragment() {
 
             is LoginResult.LoginFail -> {
                 when (loginResult.errorEntity) {
-                    is ErrorEntity.UserNameValidateErrorEntity -> showMessage(getString(R.string.user_name_is_wrong))
-                    is ErrorEntity.PasswordValidateErrorEntity -> showMessage(getString(R.string.password_is_wrong))
+                    is ErrorEntity.UserNameValidationErrorEntity -> showMessage(getString(R.string.username_validation_error))
+                    is ErrorEntity.PasswordValidationErrorEntity -> showMessage(getString(R.string.password_validation_error))
                     else -> showMessage(
                         loginResult.errorEntity.message ?: getString(R.string.unknown_message),
                     )

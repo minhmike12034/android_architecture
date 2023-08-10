@@ -7,6 +7,6 @@ sealed class ErrorEntity(val message: String? = null) {
 
     // Logic Error Entity
     sealed class LogicErrorEntity : ErrorEntity()
-    object UserNameValidateErrorEntity : LogicErrorEntity()
-    object PasswordValidateErrorEntity : LogicErrorEntity()
+    object UserNameValidationErrorEntity : LogicErrorEntity()
+    object PasswordValidationErrorEntity : LogicErrorEntity()
 }
