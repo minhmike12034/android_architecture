@@ -9,8 +9,8 @@ import com.example.data.database.model.MovieRecord
 import com.example.data.mapper.toDatabaseErrorEntity
 import com.example.data.mapper.toMovieEntity
 import com.example.data.mapper.toMovieRecord
-import com.example.data.service.movie.MovieService
 import com.example.data.paging.MoviePagingSource
+import com.example.data.service.movie.MovieService
 import com.example.domain.either.Either
 import com.example.domain.entity.MovieEntity
 import com.example.domain.error.ErrorEntity
@@ -18,18 +18,19 @@ import com.example.domain.repository.MovieRepository
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
+private const val PAGE_SIZE = 1
+
 class MovieRepositoryImpl @Inject constructor(
     private val movieService: MovieService,
     private val localMovieDataSource: LocalMovieDataSource,
 ) : MovieRepository {
 
     override fun getPagingPopularMovies(): Flow<PagingData<MovieEntity>> {
-        return Pager(PagingConfig(pageSize = 1)) {
+        return Pager(PagingConfig(pageSize = PAGE_SIZE)) {
             MoviePagingSource(movieService)
         }.flow
     }
 
-    // TODO This is DATA LOGIC
     override suspend fun getMovie(movieId: String): Either<ErrorEntity, MovieEntity> {
         return try {
             // Get movie from server

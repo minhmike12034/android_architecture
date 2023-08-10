@@ -64,7 +64,7 @@ class LoginScreenTest {
                     onUserNameChanged = {},
                     onPasswordChanged = {},
                     onBackClick = {},
-                    loginResult = LoginResult.LoginFail(ErrorEntity.UserNameValidateErrorEntity),
+                    loginResult = LoginResult.LoginFail(ErrorEntity.UserNameValidationErrorEntity),
                 )
             }
         }
@@ -89,7 +89,7 @@ class LoginScreenTest {
                     onUserNameChanged = {},
                     onPasswordChanged = {},
                     onBackClick = {},
-                    loginResult = LoginResult.LoginFail(ErrorEntity.PasswordValidateErrorEntity),
+                    loginResult = LoginResult.LoginFail(ErrorEntity.PasswordValidationErrorEntity),
                 )
             }
         }

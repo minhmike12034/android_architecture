@@ -97,11 +97,11 @@ fun HandleLoginResult(loginResult: LoginResult) {
 
         is LoginResult.LoginFail -> {
             when (loginResult.errorEntity) {
-                is ErrorEntity.UserNameValidateErrorEntity -> {
+                is ErrorEntity.UserNameValidationErrorEntity -> {
                     ShowMessage(message = stringResource(R.string.user_name_is_wrong))
                 }
 
-                is ErrorEntity.PasswordValidateErrorEntity -> {
+                is ErrorEntity.PasswordValidationErrorEntity -> {
                     ShowMessage(message = stringResource(R.string.password_is_wrong))
                 }
 

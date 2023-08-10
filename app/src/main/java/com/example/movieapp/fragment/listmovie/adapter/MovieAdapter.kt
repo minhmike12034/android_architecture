@@ -6,6 +6,7 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.domain.entity.MovieEntity
 import com.example.movieapp.databinding.ItemMovieBinding
 
@@ -39,6 +40,7 @@ class MovieAdapter(
                     .with(root.context)
                     .load(movie.imageUrl)
                     .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
                     .into(binding.imageMovie)
                 textMovieName.text = movie.title
 

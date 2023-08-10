@@ -6,7 +6,7 @@ import com.example.domain.entity.MovieEntity
 
 fun MovieDto.toMovieEntity(): MovieEntity {
     return MovieEntity(
-        id = id,
+        id = id.toString(),
         posterPath = posterPath,
         title = title,
         overview = overview,
@@ -26,7 +26,7 @@ fun MovieDto.toMovieRecord(): MovieRecord {
 
 fun MovieRecord.toMovieEntity(): MovieEntity {
     return MovieEntity(
-        id = id,
+        id = id.toString(),
         posterPath = posterPath,
         title = title,
         overview = overview,

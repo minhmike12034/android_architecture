@@ -1,0 +1,3 @@
+package com.example.domain.usecase.getpopularmovie
+
+class GetPopularMoviesUseCaseImplTest
