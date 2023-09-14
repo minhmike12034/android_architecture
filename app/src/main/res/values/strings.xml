@@ -13,4 +13,5 @@
     <string name="password_validation_error">Password must have at least 4 characters</string>
     <string name="unknown_message">Unknown message</string>
     <string name="user_login_success">%1$s login success</string>
+    <string name="list_movie_title">List Movie</string>
 </resources>

@@ -4,9 +4,11 @@ plugins {
     id 'kotlin-kapt'
     id 'com.google.dagger.hilt.android'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'jacoco'
 }
 
 apply from: "$rootDir/dependencies.gradle"
+apply from: "$rootDir/jacoco.gradle"
 
 android {
     namespace 'com.example.movieapp'
@@ -19,7 +21,7 @@ android {
         versionCode version_code
         versionName versionName
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "com.example.movieapp.utils.HiltRunner"
     }
 
     buildTypes {
@@ -47,6 +49,10 @@ android {
             languageVersion.set(JavaLanguageVersion.of(17))
         }
     }
+
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -71,6 +77,16 @@ dependencies {
 
     // Glide
     implementation "com.github.bumptech.glide:glide:$glide"
+
+    // Test
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+    androidTestImplementation 'androidx.test:runner:1.5.2'
+    androidTestImplementation 'androidx.test:rules:1.5.0'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.5'
+
+    debugImplementation "androidx.fragment:fragment-testing:1.6.1"
+    androidTestImplementation 'com.google.dagger:hilt-android-testing:2.45'
+    kaptAndroidTest 'com.google.dagger:hilt-android-compiler:2.45'
 }
 
 kapt {
