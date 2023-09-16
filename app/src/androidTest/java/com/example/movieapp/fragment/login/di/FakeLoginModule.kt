@@ -1,4 +1,4 @@
-package com.example.movieapp.fragment.listmovie.di
+package com.example.movieapp.fragment.login.di
 
 import com.example.domain.usecase.login.LoginUseCase
 import com.example.movieapp.fragment.login.di.LoginModule

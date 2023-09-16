@@ -1,4 +1,4 @@
-package com.example.movieapp.fragment.listmovie.di
+package com.example.movieapp.fragment.login.di
 
 import com.example.domain.either.Either
 import com.example.domain.entity.UserEntity
